@@ -1,0 +1,20 @@
+#!/bin/bash
+
+COMMAND=$1
+ARGS=${@:2}
+
+set -e
+
+run(){
+  docker-compose run --rm "loop-garden" $@
+}
+
+case $COMMAND in
+  bash)
+    run /bin/bash
+    ;;
+  start)
+    docker-compose up --force
+    ;;
+esac
+exit 0

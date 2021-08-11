@@ -1,7 +1,7 @@
 version: '2.4'
 
 services:
-  loop_garden:
+  loop-garden:
     build:
       context: .
       args:
