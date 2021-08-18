@@ -1,31 +1,62 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start -p 19006",
+    "test-start": "expo start --web --localhost -p 19011",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "node_modules/.bin/jest test/**/*.spec.js",
-    "eject": "expo eject"
+    "test": "start-server-and-test test-start http://localhost:19011 cy:run",
+    "eject": "expo eject",
+    "cy:run": "npx cypress run"
   },
   "dependencies": {
+    "@expo/ngrok": "^4.1.0",
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/native": "^6.0.2",
     "axios": "^0.21.1",
     "expo": "~42.0.1",
+    "expo-constants": "^11.0.1",
+    "expo-sqlite": "~9.2.1",
     "expo-status-bar": "~1.0.4",
+    "formik": "^2.2.9",
     "ios": "^0.0.1",
     "jest-expo": "^42.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-gesture-handler": "~1.10.2",
+    "react-native-reanimated": "~2.2.0",
+    "react-native-safe-area-context": "3.2.0",
+    "react-native-screens": "~3.4.0",
     "react-native-web": "~0.13.12",
-    "react-test-renderer": "^17.0.2"
+    "react-navigation": "^4.4.4",
+    "react-navigation-stack": "^2.10.4",
+    "react-redux": "^7.2.4",
+    "react-test-renderer": "^17.0.2",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.3.0"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js"
+    ]
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
-    "@testing-library/react-native": "^7.2.0"
+    "@testing-library/react-native": "^7.2.0",
+    "cypress": "^8.3.0",
+    "start-server-and-test": "^1.13.1"
   },
   "private": true
 }

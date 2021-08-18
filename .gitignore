@@ -11,3 +11,14 @@ web-build/
 
 # macOS
 .DS_Store
+
+.android
+.cache
+.expo
+.expo-shared
+.npm
+.pki
+.config
+.bash_history
+
+coverage/
