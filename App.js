@@ -1,21 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import reduxThunk from 'redux-thunk';
+
+import { StatusBar } from 'expo-status-bar';
+
+import UserDetails from './src/screens/UserDetails';
+import Navigator from './src/navigation/Navigator';
+import { init } from './src/helpers/db.js';
+import usersReducer from './src/store/users-reducer';
+import {Text, View, Button, Platform} from 'react-native';
+
+
+const rootReducer = combineReducers({
+  users: usersReducer
+});
+
+const store = createStore(rootReducer, applyMiddleware(reduxThunk));
+init().then(() => {
+  console.log("Criação da base ocorreu com sucesso.");
+}).catch((err) => {
+  console.log('Criação da base falhou.');
+  console.log(err);
+});
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <Navigator />
+    </ Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
