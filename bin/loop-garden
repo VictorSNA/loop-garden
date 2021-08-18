@@ -16,5 +16,8 @@ case $COMMAND in
   start)
     docker-compose up --force
     ;;
+  setup)
+    docker-compose build --build-arg uid=$EUID
+    ;;
 esac
 exit 0
