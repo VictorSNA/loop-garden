@@ -16,5 +16,5 @@ services:
       - '19002:19002'
       - '19010:19010'
       - '19006:19006'
-    command: expo start
+    command: expo start -m tunnel
 

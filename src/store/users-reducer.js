@@ -2,57 +2,72 @@ import * as usersActions from './users-actions';
 import User from '../model/User';
 
 const initialState = {
-  users: []
+  user: null
 }
 
 export default(state = initialState, action) => {
   switch(action.type) {
-    case usersActions.ADD_USER:
-      const u = new User(
-        action.dataUser.id.toString(),
-        action.dataUser.name,
-        action.dataUser.email,
-        action.dataUser.password
-      );
-      console.log(u);
-      console.log(state);
+    case usersActions.SUCCESS_ADD_USER:
+      var user_payload = action.payload.user;
+      var user = new User(
+        user_payload.uid,
+        user_payload.email,
+        user_payload.emailVerified
+      )
 
       return {
-        users: state.users.concat(u)
-      };
-    case usersActions.FIND_USER:
-      return {
-        users: action.dataUser.map(u => new User(
-          u.id.toString(),
-          u.name,
-          u.email,
-          "")
-        )
+        user: user,
+        successUserCreationMessage: "Usuário criado com sucesso"
       }
-    case usersActions.DEL_USER:
-      return initialState;
 
-    case usersActions.UPDATE_USER:
+    case usersActions.FAILURE_ADD_USER:
       return {
-        users: action.users.map(u => new User(
-          u.id.toString(),
-          u.name,
-          u.email,
-          "")
-        )
+        ...state,
+        failureUserCreationMessage: action.payload.error_message
       }
+
+    case usersActions.CLEAR_CREATE_USER_SUCCESS_MESSAGE:
+      return {
+        ...state,
+        successUserCreationMessage: ""
+      }
+
+    case usersActions.SUCCESS_LOGIN_USER:
+      var user_payload = action.payload.user;
+
+      var user = new User(
+        user_payload.uid,
+        user_payload.email,
+        user_payload.emailVerified
+      )
+
+      return {
+        user: user,
+        successUserLoginMessage: ""
+      }
+
+
+    case usersActions.SUCCESS_DEL_USER:
+      return{
+        user: null,
+        successUserDeleteMessage: "Usuário excluído com sucesso"
+      }
+
     case usersActions.DESTROY_SESSION:
       return {
-        users: action.users
+        user: null
       }
-    case usersActions.LOGIN_USER:
+
+    case usersActions.UPDATES_USER_STATE:
+      var user_payload = action.payload.user;
+      var user = new User(
+        user_payload.uid,
+        user_payload.email,
+        user_payload.emailVerified
+      )
+
       return {
-        users: action.users.map(u => new User(
-          u.id.toString(),
-          u.name,
-          u.email,
-          "")
-        )
+        user: user
       }
 
     default:

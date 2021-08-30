@@ -12,23 +12,20 @@ import * as usersActions from '../store/users-actions'
 
 const UsersSignupInput= (props) => {
   const dispatch = useDispatch();
-  const addUser = () => {
+
+  const createUser = () => {
     dispatch(
-      usersActions.addUser(name, email, password)
+      usersActions.addUser(email, password)
     );
 
-    props.goBack();
+    props.auth();
   }
-
-  const [name, setName] = useState ('');
-  const captureName = (name) => {
-    setName(name)
-  };
 
   const [email, setEmail] = useState ('');
   const captureEmail = (email) => {
     setEmail(email)
   };
+
   const [password, setPassword] = useState ('');
   const capturePassword = (password) => {
     setPassword(password)
@@ -36,12 +33,6 @@ const UsersSignupInput= (props) => {
 
   return(
     <View>
-      <Text>Nome:</Text>
-      <TextInput
-        testID="name"
-        onChangeText={captureName}
-      />
-
       <Text>E-mail:</Text>
       <TextInput
         testID="email"
@@ -54,7 +45,7 @@ const UsersSignupInput= (props) => {
       <Button
         title="Cadastrar"
         testID="cadastrar-confirmar"
-        onPress={() => { addUser() }}
+        onPress={() => { createUser() }}
       />
     </View>
   )

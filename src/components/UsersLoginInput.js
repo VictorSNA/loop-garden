@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -8,9 +8,20 @@ import {
 
 import { useDispatch } from 'react-redux';
 
-import * as usersActions from '../store/users-actions'
+import * as usersActions from '../store/users-actions';
+
+import { useSelector } from 'react-redux';
 
 const UsersLoginInput = (props) => {
+  useEffect(() => {
+  if(user.user != null){
+    console.log(user.user);
+    props.goApp();
+  }
+  }, user);
+
+  const user = useSelector(state => state.user);
+
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState ('');
@@ -22,7 +33,7 @@ const UsersLoginInput = (props) => {
     setPassword(password)
   };
 
-  const login = () => {
+  const login = async () => {
     dispatch(
       usersActions.login(email, password)
     );
@@ -53,6 +64,4 @@ const UsersLoginInput = (props) => {
   )
 }
 
-
 export default UsersLoginInput;
-
