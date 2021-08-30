@@ -2,5 +2,7 @@
   "fixturesFolder": false,
   "supportFile": false,
   "pluginsFile": false,
-  "baseUrl": "http://0.0.0.0:19006"
+  "baseUrl": "http://0.0.0.0:19006",
+  "video": false,
+  "screenshotOnRunFailure": false
 }

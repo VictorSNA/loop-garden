@@ -1,4 +1,4 @@
-export default= {
+export default {
   apiKey: "AIzaSyBdRiraR6JjXgbGiUdLsMMGIbedM8Tg-aA",
   authDomain: "loop-garden.firebaseapp.com",
   projectId: "loop-garden",

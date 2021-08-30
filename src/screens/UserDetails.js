@@ -1,67 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import * as usersActions from '../store/users-actions';
 import { useDispatch } from 'react-redux';
 
-import {Text, View, Button, Platform, TextInput} from 'react-native';
-
+import {Text, View, Button, TextInput, Alert} from 'react-native';
 
 const UserDetails = (props) => {
+  const state = useSelector(state => state.user)
+
   const dispatch = useDispatch();
+
   const delUser = () => {
     dispatch(
-      usersActions.delUser(users.users[0].email)
-    );
-
-    props.navigation.navigate('Login');
-  }
-
-  const updateUser= () => {
-    dispatch(
-      usersActions.updateUser(users.users[0].id, name, email)
-    );
+      usersActions.deleteUser()
+    )
   }
 
   const logOut = () => {
     dispatch(
-      usersActions.destroySession(users.users[0].id)
-    );
+      usersActions.destroySession()
+    )
+  }
 
+  const redirectLogin = () => {
     props.navigation.navigate('Login');
   }
 
-  const users = useSelector(state => state.users)
-
   const renderUserInfo = () => {
-    if(users.users.length > 0){
-      return(
-        <View>
-        <Text>Nome: </Text>
-        <TextInput placeholder={users.users[0].name} onChangeText={captureName}/>
-        <Text>Email: </Text>
-        <TextInput placeholder={users.users[0].email} onChangeText={captureEmail}/>
+    return(
+      <View>
+      { state.user ? (
+          <View>
+            <Text>Email: </Text>
+            <TextInput placeholder={state.user.email}/>
+            <Button title="Deletar Conta" onPress={() => delUser()}/>
+            <Button title="SAIR" onPress={() => logOut()}/>
+          </View>
 
-        <Button title="Atualizar Conta" onPress={() => updateUser()}/>
-
-        <Button title="Deletar Conta" onPress={() => delUser()}/>
-
-        <Button title="SAIR" onPress={() => logOut()}/>
-        </View>
-      )
-    }else{
-      return <View><Text>Faça login para continuar</Text></View>
-    }
+      ): (
+        Alert.alert(
+          "Faça login",
+          "Para continuar faça o login",
+          [
+            { text: "OK", onPress: () => redirectLogin() }
+          ]
+        )
+      )}
+      </View>
+    );
   }
-
-  const [name, setName] = useState ('');
-  const captureName = (name) => {
-    setName(name)
-  };
-
-  const [email, setEmail] = useState ('');
-  const captureEmail = (email) => {
-    setEmail(email)
-  };
 
   return(
     renderUserInfo()
