@@ -1,8 +1,19 @@
-import React, { useEffect } from 'react';
-import {Text, View, Alert} from 'react-native';
+import React, { useEffect, useState } from 'react';
+
+import {
+  Alert,
+  ActivityIndicator,
+  FlatList,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
 
 import { useSelector } from 'react-redux'
 
+import axios from 'axios';
+
+import HortaSelect from '../components/HortaSelect';
 
 const HortaSelection = (props) => {
   const handleCloseCreateUserSuccessMessage = () => {
@@ -10,21 +21,51 @@ const HortaSelection = (props) => {
       usersActions.clearCreateUserSuccessMessage()
     );
   };
-  useEffect(() => {
-    if(state.users.length > 0){
-      props.navigation.navigate('Details');
-    }
-  }, state);
-
 
   useEffect(() => {
-    if(!user.user){
+    if(!state.user){
       props.navigation.navigate('Login');
     }
-    }, user);
+    }, state);
 
-  const state = useSelector(state => state.users)
+    const [data, setData] = useState([]);
 
+  useEffect(() => {
+    getHortasFromNetwork();
+  }, []);
+
+
+  const state = useSelector(state => state.user)
+
+  const [loadingHortas, setLoadingHortas] = useState(true);
+
+  const getHortasFromNetwork = () => {
+    let base_ip = '192.168.1.';
+    let max_ip = 256;
+    for(var i = 0; i < max_ip; i++) {
+      let url = 'http://';
+      url += base_ip;
+      url += i;
+      url += ":8080";
+      url += '/alive';
+      axios.get(url)
+        .then((response) => {
+          if(response.data.data.alive) {
+            setData(previous =>[...previous, {horta: i, url: url}]);
+          }
+        })
+        .catch((error) => {
+          console.log("Nothing found at " + url);
+        })
+        if(i == max_ip -1){ setLoadingHortas(false); }
+    }
+  };
+
+  const renderItem = () => {
+    return (
+      <HortaSelect />
+    )
+  }
   return(
     <View>
     {state.user.successUserCreationMessage ? (
@@ -36,7 +77,26 @@ const HortaSelection = (props) => {
         ]
       )
     ) : null}
-    <Text>Hortaselection</Text>
+
+    { loadingHortas ? (
+      <ActivityIndicator size="large" color="#00ff00" />
+    ) : (
+      <View>
+      { data.length ?
+        (
+          <SafeAreaView>
+          <FlatList
+            data={data}
+            renderItem={renderItem}
+            keyExtractor={item => item.url}
+          />
+        </SafeAreaView>
+        )
+      :
+        (<Text>Não há hortas em seu wifi</Text>)}
+      </View>
+    )
+    }
     </View>
   )
 }
