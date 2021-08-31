@@ -9,8 +9,12 @@ const Homepage = (props) => {
   const goTo = (page) => {
     props.navigation.navigate(page);
   }
-  const emergencyButton = async () => {
+  const detalhesUsuarios = async () => {
     props.navigation.navigate('Details');
+  }
+
+  const selectionHortas = async () => {
+    props.navigation.navigate('Hortas');
   }
 
   return(
@@ -18,9 +22,14 @@ const Homepage = (props) => {
       <Text>Bem vindo de volta, selecione sua horta para continuar{console.log(state)}</Text>
       <Button
           title="Usuário"
-          onPress={() => { emergencyButton() }
+          onPress={() => { detalhesUsuarios() }
           }
-        />
+      />
+      <Button
+          title="Lista de Hortas"
+          onPress={() => { selectionHortas() }
+          }
+      />
     </View>
   )
 }
