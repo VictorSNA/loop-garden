@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import {
-  Alert,
   ActivityIndicator,
   FlatList,
   SafeAreaView,
@@ -16,24 +15,17 @@ import axios from 'axios';
 import HortaSelect from '../components/HortaSelect';
 
 const HortaSelection = (props) => {
-  const handleCloseCreateUserSuccessMessage = () => {
-    dispatch(
-      usersActions.clearCreateUserSuccessMessage()
-    );
-  };
-
   useEffect(() => {
     if(!state.user){
       props.navigation.navigate('Login');
     }
     }, state);
 
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     getHortasFromNetwork();
   }, []);
-
 
   const state = useSelector(state => state.user)
 
@@ -47,7 +39,7 @@ const HortaSelection = (props) => {
       url += base_ip;
       url += i;
       url += ":8080";
-      url += '/alive';
+      url += '/info';
       axios.get(url)
         .then((response) => {
           if(response.data.data.alive) {
@@ -68,16 +60,6 @@ const HortaSelection = (props) => {
   }
   return(
     <View>
-    {state.user.successUserCreationMessage ? (
-      Alert.alert(
-        "Sucesso",
-        state.user.successUserCreationMessage,
-        [
-          { text: "OK", onPress: () => handleCloseCreateUserSuccessMessage() }
-        ]
-      )
-    ) : null}
-
     { loadingHortas ? (
       <ActivityIndicator size="large" color="#00ff00" />
     ) : (

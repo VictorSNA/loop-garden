@@ -1,14 +1,27 @@
 import React from 'react';
-import {View, Text, Button, AsyncStorage} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  Alert,
+  AsyncStorage
+} from 'react-native';
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as usersActions from '../store/users-actions';
 
 const Homepage = (props) => {
+  const dispatch = useDispatch();
+
+  const handleCloseCreateUserSuccessMessage = () => {
+    dispatch(
+      usersActions.clearCreateUserSuccessMessage()
+    );
+  };
+
   const state = useSelector(state => state);
 
-  const goTo = (page) => {
-    props.navigation.navigate(page);
-  }
   const detalhesUsuarios = async () => {
     props.navigation.navigate('Details');
   }
@@ -19,6 +32,15 @@ const Homepage = (props) => {
 
   return(
     <View>
+      {state.user.successUserCreationMessage ? (
+        Alert.alert(
+          "Sucesso",
+          state.user.successUserCreationMessage,
+          [
+            { text: "OK", onPress: () => handleCloseCreateUserSuccessMessage() }
+          ]
+        )
+      ) : null}
       <Text>Bem vindo de volta, selecione sua horta para continuar{console.log(state)}</Text>
       <Button
           title="Usuário"
