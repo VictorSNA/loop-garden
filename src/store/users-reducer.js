@@ -22,14 +22,20 @@ export default(state = initialState, action) => {
 
     case usersActions.FAILURE_ADD_USER:
       return {
-        ...state,
-        failureUserCreationMessage: action.payload.error_message
+        user: null,
+        failureUserCreationMessage: action.payload.error_code
       }
 
     case usersActions.CLEAR_CREATE_USER_SUCCESS_MESSAGE:
       return {
         ...state,
         successUserCreationMessage: ""
+      }
+
+    case usersActions.CLEAR_CREATE_USER_FAIL_MESSAGE:
+      return {
+        ...state,
+        failureUserCreationMessage: ""
       }
 
     case usersActions.SUCCESS_LOGIN_USER:
@@ -46,6 +52,17 @@ export default(state = initialState, action) => {
         successUserLoginMessage: ""
       }
 
+    case usersActions.FAILURE_LOGIN_USER:
+      return {
+        user: null,
+        failedLoginMessage: action.payload.error_code
+      }
+
+    case usersActions.CLEAR_FAILURE_LOGIN_ERROR_MESSAGE:
+      return {
+        ...state,
+        failedLoginMessage: ""
+      }
 
     case usersActions.SUCCESS_DEL_USER:
       return{
