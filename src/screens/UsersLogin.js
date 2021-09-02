@@ -8,6 +8,18 @@ import * as usersActions from '../store/users-actions';
 
 import i18n from '../../i18n';
 
+import {
+  PageTitle,
+  StyledContainer,
+  InnerContainer,
+  StyledButton,
+  StyleTextInput
+} from '../components/styles';
+
+import { Colors } from '../components/styles';
+
+const { primarySaturateDarkest, light } = Colors;
+
 const UsersLogin = (props) => {
   const state = useSelector(state => state);
 
@@ -25,29 +37,34 @@ const UsersLogin = (props) => {
 
   const renderLogin = () => {
     return (
-      <View>
-        {state.user.failedLoginMessage ? (
-          Alert.alert(
-            "Erro",
-            i18n.t(
-              "firebase.errors.auth." + state.user.failedLoginMessage.split("/")[1]
-            ),
-            [
-              { text: "OK", onPress: () => handleCloseFailedLoginMessage() }
-            ]
-          )
-        ) : null}
-        <UsersLoginInput goApp={() => {goTo('App')}}/>
+        <StyledContainer>
+          <InnerContainer>
+            <PageTitle>Quem é você?</PageTitle>
+            <UsersLoginInput goApp={() => {goTo('App')}}/>
 
-        <Text>Não possui uma conta?</Text>
-        <Button
-          title="Cadastrar"
-          testID="cadastrar"
-          onPress={() => {
-            goTo("Signup");}
-          }
-        />
-      </View>
+            <Text>Não possui uma conta?</Text>
+            <StyledButton
+              title="Cadastrar"
+              testID="cadastrar"
+              onPress={() => {
+                goTo("Signup");}
+              }
+            />
+
+            {state.user.failedLoginMessage ? (
+            Alert.alert(
+              "Erro",
+              i18n.t(
+                "firebase.errors.auth." + state.user.failedLoginMessage.split("/")[1]
+              ),
+              [
+                { text: "OK", onPress: () => handleCloseFailedLoginMessage() }
+              ]
+            )
+          ) : null}
+          </InnerContainer>
+        </StyledContainer>
+
     )
   }
 
