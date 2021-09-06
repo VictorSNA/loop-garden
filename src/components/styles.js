@@ -118,3 +118,15 @@ export const StyledButton = styled.Button`
 export const ButtonText = styled.Text`
   font-size: 16px;
 `
+export const FullHeight = styled.View`
+  height: 100%;
+  flex: 1;
+  align-items: center;
+  padding: 0 30px;
+  background-color: ${Colors.white};
+`
+
+// export const ImageLogoLoading = styled.Image`
+//   width: 80%;
+//   height: auto;
+// `

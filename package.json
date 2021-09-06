@@ -21,6 +21,7 @@
     "expo-status-bar": "~1.0.4",
     "firebase": "8.2.3",
     "formik": "^2.2.9",
+    "i18n-next": "^0.0.4",
     "ios": "^0.0.1",
     "jest-expo": "^42.0.0",
     "react": "16.13.1",
