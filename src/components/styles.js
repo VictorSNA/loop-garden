@@ -44,7 +44,7 @@ const {
 
 export const StyledContainer = styled.View`
   flex: 1;
-  padding: 25px;
+  padding: 18px;
   padding-top: ${StatusBarHeight + 10}px;
 `
 
@@ -93,18 +93,13 @@ export const StyledInputLabel = styled.Text`
   text-aligh: left;
 `
 
-export const LeftIcon = styled.View`
+export const LeftIcon = styled.TouchableOpacity`
   left: 15px;
-  top: 38px;
-  position: absolute;
-  z-index: 1;
 `
 
 export const RightIcon = styled.TouchableOpacity`
-  left: 15px;
-  top: 38px;
+  right: 15px;
   position: absolute;
-  z-index: 1;
 `
 
 export const StyledButton = styled.Button`
@@ -126,7 +121,11 @@ export const FullHeight = styled.View`
   background-color: ${Colors.white};
 `
 
-// export const ImageLogoLoading = styled.Image`
-//   width: 80%;
-//   height: auto;
-// `
+export const HortaCard = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px;
+  border-bottom-width: 1px;
+  border-color: ${primaryPastel};
+  border-style: dashed;
+`

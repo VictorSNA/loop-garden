@@ -27,21 +27,22 @@ const AuthLoadingScreen = (props) => {
     let response = await AsyncStorage.getItem('userData');
 
     if(response) {
-      props.navigation.navigate('App');
+      setTimeout(() => {props.navigation.navigate('App');}, 1000)
       dispatch(
         usersActions.createsUserState(response)
       );
     }
     else{
-      setTimeout(() => {props.navigation.navigate('Auth');}, 5000)
+      setTimeout(() => {props.navigation.navigate('Auth');}, 1000)
     }
   }
-  
+
   return (
     <FullHeight>
       <Image
-        source={ require('../media/logo.png') } 
-        style={{width: '60%'}}
+        source={ require('../media/logo.png') }
+        style={{width: '100%'}}
+        resizeMode="contain"
       />
       <ActivityIndicator />
     </FullHeight>
