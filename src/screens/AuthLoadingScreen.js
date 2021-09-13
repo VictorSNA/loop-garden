@@ -33,7 +33,7 @@ const AuthLoadingScreen = (props) => {
       );
     }
     else{
-      setTimeout(() => {props.navigation.navigate('Auth');}, 1000)
+      setTimeout(() => {props.navigation.navigate('Auth');}, 2500)
     }
   }
 
@@ -41,7 +41,7 @@ const AuthLoadingScreen = (props) => {
     <FullHeight>
       <Image
         source={ require('../media/logo.png') }
-        style={{width: '100%'}}
+        style={{width: '70%', paddingTop: '20%'}}
         resizeMode="contain"
       />
       <ActivityIndicator />

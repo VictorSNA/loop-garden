@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, Button, Alert} from 'react-native';
+import {Text, View, Button, Pressable, Alert} from 'react-native';
 
 import UsersLoginInput from '../../src/components/UsersLoginInput';
 
@@ -13,7 +13,13 @@ import {
   StyledContainer,
   InnerContainer,
   StyledButton,
-  StyleTextInput
+  StyleTextInput,
+  SubTitle,
+  WrapperStandardButton,
+  StandardButton,
+  StandardButtonText,
+  SecondaryButton,
+  SecondaryButtonText
 } from '../components/styles';
 
 import { Colors } from '../components/styles';
@@ -37,19 +43,24 @@ const UsersLogin = (props) => {
 
   const renderLogin = () => {
     return (
-        <StyledContainer>
+        <StyledContainer><PageTitle>Quem é você?</PageTitle>
           <InnerContainer>
-            <PageTitle>Quem é você?</PageTitle>
+            
+            
             <UsersLoginInput goApp={() => {goTo('App')}}/>
 
-            <Text>Não possui uma conta?</Text>
-            <StyledButton
-              title="Cadastrar"
-              testID="cadastrar"
-              onPress={() => {
-                goTo("Signup");}
-              }
-            />
+            <SubTitle>Não possui uma conta?</SubTitle>
+            <WrapperStandardButton>
+              <SecondaryButton
+                title="Cadastrar"
+                testID="cadastrar"
+                onPress={() => {
+                  goTo("Signup");}
+                }
+              >
+                <SecondaryButtonText>Cadastrar</SecondaryButtonText>
+              </SecondaryButton>
+            </WrapperStandardButton>
 
             {state.user.failedLoginMessage ? (
             Alert.alert(

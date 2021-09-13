@@ -1,6 +1,7 @@
-import styled from 'styled-components/native';
-import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import styled from 'styled-components';
+import { View, Text, Image, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
+
 
 const StatusBarHeight = Constants.statusBarHeight;
 
@@ -46,11 +47,14 @@ export const StyledContainer = styled.View`
   flex: 1;
   padding: 18px;
   padding-top: ${StatusBarHeight + 10}px;
+  
 `
 
 export const InnerContainer = styled.View`
   flex: 1;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
 `
 
 //export const PageLogo = styled.Image`
@@ -59,34 +63,78 @@ export const InnerContainer = styled.View`
 //`
 
 export const PageTitle = styled.Text`
-  font-size: 32px;
+  font-size: 40px;
   text-align: center;
   font-weight: bold;
-  padding: 10px;
+  padding-top: 20px;
+  color: ${dark};
 `
 
 export const SubTitle = styled.Text`
-  font-size: 18px;
+  font-size: 24px;
+  margin-top: 50px;
   margin-bottom: 20px;
+  padding-top: 10px;
   letter-spacing: 1px;
   font-weight: bold;
+  text-align: center;
+  border-top-width: 2px;
+  border-color: ${neutral}
+  color: ${dark};
 `
 
 export const StyledFormArea = styled.View`
   width: 90%;
 `
 
+export const LabelText = styled.Text`
+ font-size: 20px;
+ font-weight: bold;
+`
+
 export const StyleTextInput = styled.TextInput`
   padding: 15px;
-  padding-left: 55px;
-  padding-right: 55px;
-  border-radius: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 3px;
   font-size: 16px;
   height: 60px;
   margin-vertical: 3px;
   margin-bottom: 10px;
+  border-width: 3px;
+  border-color: ${primarySaturateDarkest};
+  background-color: ${white};
 `
 
+export const WrapperStandardButton = styled.View`
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  margin-top: 20px;
+`
+export const StandardButton = styled.Pressable`
+  padding: 7px 20px;
+  border-radius: 3px;
+  background-color: ${primarySaturateDarkest};
+`
+export const StandardButtonText = styled.Text`
+  color: ${light};
+  font-size: 24px;
+  text-transform: uppercase;
+`
+
+export const SecondaryButton = styled.Pressable`
+  padding: 7px 20px;
+  border-radius: 3px;
+  background-color: ${white};
+  border-color: ${primarySaturateDarkest};
+  border-width: 2px;
+  margin: 0 auto;
+`
+export const SecondaryButtonText = styled.Text`
+  color: ${primarySaturateDarkest};
+  font-size: 24px;
+  text-transform: uppercase;
+`
 
 export const StyledInputLabel = styled.Text`
   font-size: 13px;
@@ -103,11 +151,9 @@ export const RightIcon = styled.TouchableOpacity`
 `
 
 export const StyledButton = styled.Button`
-  padding: 15px;
-  justify-content: center;
-  border-radius: 5px;
-  margin-vertical: 5px;
-  height: 60px;
+  background-color: black;
+  font-size: 320px;
+  color: green;
 `
 
 export const ButtonText = styled.Text`

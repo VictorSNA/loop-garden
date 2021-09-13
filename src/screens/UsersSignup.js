@@ -4,6 +4,12 @@ import * as usersActions from '../store/users-actions';
 
 import UsersSignupInput from '../components/UsersSignUpInput';
 
+import {
+  PageTitle,
+  StyledContainer,
+  InnerContainer
+} from '../components/styles';
+
 import { useSelector, useDispatch } from 'react-redux'
 import i18n from '../../i18n';
 
@@ -38,7 +44,16 @@ const UsersSignup = (props) => {
     {createUserFailureMessage ? (
       <Text>{createUserFailureMessage}</Text>
     ) : null}
-    <UsersSignupInput auth={() => { props.navigation.navigate('Auth') }}  />
+
+    <StyledContainer>
+      <PageTitle>Bem vindo!</PageTitle>
+          <InnerContainer
+            style={{marginBottom: '10%'}}
+          >
+            <UsersSignupInput auth={() => { props.navigation.navigate('Auth') }}  />
+        </InnerContainer>
+    </StyledContainer>
+
     </>
   )
 }
