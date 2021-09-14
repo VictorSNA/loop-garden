@@ -40,6 +40,18 @@ const HortaSelect = (props) => {
     );
   }
 
+  const linkToGarden = () => {
+    let new_url = props.url.replace('info', "register");
+
+    axios.post(new_url, {headers: {Accept: 'application/json'}}, { params: {uid: props.user_uid} })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   return(
     <HortaCard>
     <LeftIcon style={{flex: 1}}>
@@ -52,9 +64,10 @@ const HortaSelect = (props) => {
 
     <Text style={{flex: 5}}>Horta {props.horta_name}</Text>
 
+
     <RightIcon
       onPress={() => {
-        console.log("oi");
+        linkToGarden();
       }}
         style={{borderRadius: 30, padding: 5, backgroundColor: Colors.primarySaturateLight}}
     >

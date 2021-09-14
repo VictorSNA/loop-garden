@@ -59,9 +59,9 @@ const HortaSelection = (props) => {
     }
   };
 
-  const renderItem = (value) => {
+  const renderItem = (item) => {
     return (
-      <HortaSelect horta_name={value.item.horta}/>
+      <HortaSelect url={item.item.url} user_uid={state.user.uid}/>
     )
   }
   return(
@@ -78,7 +78,7 @@ const HortaSelection = (props) => {
           <SafeAreaView>
           <FlatList
             data={Object.values(data)}
-            renderItem={value => renderItem(value)}
+            renderItem={(item) => renderItem(item)}
             keyExtractor={item => item.url}
           />
           </SafeAreaView>
