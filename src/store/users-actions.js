@@ -78,7 +78,7 @@ export const clearCreateUserSuccessMessage = () =>{
 export const clearCreateUserFailMessage = () =>{
   return async dispatch => {
     dispatch({
-      type: CLEAR_CREATE_USER_SUCCESS_MESSAGE
+      type: CLEAR_CREATE_USER_FAIL_MESSAGE
     });
   }
 };

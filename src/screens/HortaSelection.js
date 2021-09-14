@@ -5,7 +5,7 @@ import {
   FlatList,
   SafeAreaView,
   Text,
-  View,
+  View
 } from 'react-native';
 
 import { useSelector } from 'react-redux'
@@ -13,6 +13,12 @@ import { useSelector } from 'react-redux'
 import axios from 'axios';
 
 import HortaSelect from '../components/HortaSelect';
+
+import {
+  StyledContainer,
+  PageTitle,
+  Colors
+} from '../components/styles';
 
 const HortaSelection = (props) => {
   useEffect(() => {
@@ -33,8 +39,8 @@ const HortaSelection = (props) => {
 
   const getHortasFromNetwork = () => {
     let base_ip = '192.168.1.';
-    let max_ip = 256;
-    for(var i = 0; i < max_ip; i++) {
+    let max_ip = 255;
+    for(var i = 1; i < max_ip; i++) {
       let url = 'http://';
       url += base_ip;
       url += i;
@@ -43,7 +49,7 @@ const HortaSelection = (props) => {
       axios.get(url)
         .then((response) => {
           if(response.data.data.alive) {
-            setData(previous =>[...previous, {horta: i, url: url}]);
+            setData(previous =>[...previous, {horta: response.data.data.arduino_id, url: url}]);
           }
         })
         .catch((error) => {
@@ -59,27 +65,31 @@ const HortaSelection = (props) => {
     )
   }
   return(
-    <View>
+    <StyledContainer>
     { loadingHortas ? (
       <ActivityIndicator size="large" color="#00ff00" />
     ) : (
       <View>
       { data.length ?
         (
+          <>
+          <PageTitle>Selecione uma horta</PageTitle>
+
           <SafeAreaView>
           <FlatList
-            data={data}
+            data={Object.values(data)}
             renderItem={(item) => renderItem(item)}
             keyExtractor={item => item.url}
           />
-        </SafeAreaView>
+          </SafeAreaView>
+          </>
         )
       :
-        (<Text>Não há hortas em seu wifi</Text>)}
+        (<PageTitle>Não há hortas em seu wifi</PageTitle>)}
       </View>
     )
     }
-    </View>
+    </StyledContainer>
   )
 }
 

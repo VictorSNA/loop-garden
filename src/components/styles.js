@@ -1,105 +1,177 @@
-import styled from 'styled-components/native';
-import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import styled from 'styled-components';
+import { View, Text, Image, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
+
 
 const StatusBarHeight = Constants.statusBarHeight;
 
 // colors
 
 export const Colors = {
-  primary: "#ffffff",
-  secondary: "#e5e7eb",
-  tertiary: "#1f2937",
-  darkLight: "#9ca3af",
-  brand: "#6d28d9",
-  green: "#10b981",
-  red: "#ef4444"
+  primarySaturateDarkest: '#26734F',
+  primarySaturateDark:  '#38A673',
+  primarySaturateLight: '#73D99F',
+  primaryPastel: '#A9D9BA',
+  complementary: '#F27D72',
+  neutral: '#D8E3F2',
+  light: '#EFEFEE',
+  dark: '#333333',
+  zapzap: '#26D66E',
+  brancoZapzap: '#FEFEFE',
+  gray: '#838993',
+  white: '#FFFFFF',
+  redDark: '#A23E34',
+  darkGrey: '#686D74',
+  help: '#097395'
 }
 
-const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
+const {
+  primarySaturateDarkest,
+  primarySaturateDark,
+  primarySaturateLight,
+  primaryPastel,
+  complementary,
+  neutral,
+  light,
+  dark,
+  zapzap,
+  brancoZapzap,
+  gray,
+  white,
+  redDark,
+  darkGrey,
+  help
+ } = Colors;
 
 export const StyledContainer = styled.View`
   flex: 1;
-  padding: 25px;
-  background-color: ${primary};
+  padding: 18px;
   padding-top: ${StatusBarHeight + 10}px;
+  
 `
 
 export const InnerContainer = styled.View`
   flex: 1;
-  width: 100%;
-  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
 `
 
-export const PageLogo = styled.Image`
-  width: 250px;
-  height: 250px;
-`
+//export const PageLogo = styled.Image`
+//  width: 250px;
+//  height: 250px;
+//`
 
 export const PageTitle = styled.Text`
-  font-size: 30px;
+  font-size: 40px;
   text-align: center;
   font-weight: bold;
-  color: ${brand};
-  padding: 10px;
+  padding-top: 20px;
+  color: ${dark};
 `
 
 export const SubTitle = styled.Text`
-  font-size: 18px;
+  font-size: 24px;
+  margin-top: 50px;
   margin-bottom: 20px;
+  padding-top: 10px;
   letter-spacing: 1px;
   font-weight: bold;
-  color: ${tertiary}
+  text-align: center;
+  border-top-width: 2px;
+  border-color: ${neutral}
+  color: ${dark};
 `
 
 export const StyledFormArea = styled.View`
   width: 90%;
 `
 
+export const LabelText = styled.Text`
+ font-size: 20px;
+ font-weight: bold;
+`
+
 export const StyleTextInput = styled.TextInput`
-  background-color: ${secondary};
   padding: 15px;
-  padding-left: 55px;
-  padding-right: 55px;
-  border-radius: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 3px;
   font-size: 16px;
   height: 60px;
   margin-vertical: 3px;
   margin-bottom: 10px;
-  color: ${tertiary};
+  border-width: 3px;
+  border-color: ${primarySaturateDarkest};
+  background-color: ${white};
 `
 
+export const WrapperStandardButton = styled.View`
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  margin-top: 20px;
+`
+export const StandardButton = styled.Pressable`
+  padding: 7px 20px;
+  border-radius: 3px;
+  background-color: ${primarySaturateDarkest};
+`
+export const StandardButtonText = styled.Text`
+  color: ${light};
+  font-size: 24px;
+  text-transform: uppercase;
+`
+
+export const SecondaryButton = styled.Pressable`
+  padding: 7px 20px;
+  border-radius: 3px;
+  background-color: ${white};
+  border-color: ${primarySaturateDarkest};
+  border-width: 2px;
+  margin: 0 auto;
+`
+export const SecondaryButtonText = styled.Text`
+  color: ${primarySaturateDarkest};
+  font-size: 24px;
+  text-transform: uppercase;
+`
 
 export const StyledInputLabel = styled.Text`
-  color: ${tertiary};
   font-size: 13px;
   text-aligh: left;
 `
 
-export const LeftIcon = styled.View`
+export const LeftIcon = styled.TouchableOpacity`
   left: 15px;
-  top: 38px;
-  position: absolute;
-  z-index: 1;
 `
 
 export const RightIcon = styled.TouchableOpacity`
-  left: 15px;
-  top: 38px;
+  right: 15px;
   position: absolute;
-  z-index: 1;
 `
 
-export const StyledButton = styled.TouchableOpacity`
-  padding: 15px;
-  background-color: ${brand};
-  justify-content: center;
-  border-radius: 5px;
-  margin-vertical: 5px;
-  height: 60px;
+export const StyledButton = styled.Button`
+  background-color: black;
+  font-size: 320px;
+  color: green;
 `
 
 export const ButtonText = styled.Text`
-  color: ${primary};
   font-size: 16px;
+`
+export const FullHeight = styled.View`
+  height: 100%;
+  flex: 1;
+  align-items: center;
+  padding: 0 30px;
+  background-color: ${Colors.white};
+`
+
+export const HortaCard = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px;
+  border-bottom-width: 1px;
+  border-color: ${primaryPastel};
+  border-style: dashed;
 `
