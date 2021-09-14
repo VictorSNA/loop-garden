@@ -3,8 +3,17 @@ import {
   Text,
   View,
   Button,
-  TextInput
+  TextInput,
+  Pressable
 } from 'react-native';
+
+import {
+  StyleTextInput,
+  LabelText,
+  WrapperStandardButton,
+  StandardButton,
+  StandardButtonText
+} from '../components/styles';
 
 import { useDispatch } from 'react-redux';
 
@@ -41,24 +50,32 @@ const UsersLoginInput = (props) => {
 
   return(
     <View>
-      <Text>Email:</Text>
-      <TextInput
+      <LabelText>Email:</LabelText>
+      <StyleTextInput
         testID=""
         onChangeText={captureEmail}
+        placeholder="Seu email"
       />
 
-      <Text>Senha:</Text>
-      <TextInput
+      <LabelText
+        style={{marginTop: 10}}
+      >Senha:</LabelText>
+      <StyleTextInput
         testID=""
         secureTextEntry={true}
         onChangeText={capturePassword}
+        placeholder="Sua senha"
       />
 
-      <Button
-        title="Login"
-        testID=""
+ 
+
+      <WrapperStandardButton>
+        <StandardButton
         onPress={() => { login() }}
-      />
+        >
+          <StandardButtonText>Logar</StandardButtonText>
+        </StandardButton>
+      </WrapperStandardButton>
 
       </View>
   )

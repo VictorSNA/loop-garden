@@ -3,11 +3,18 @@ import React, { useState, useEffect } from 'react';
 import {
   ActivityIndicator,
   View,
+  Image,
   AsyncStorage
 } from 'react-native';
 
+import {
+  FullHeight,
+  ImageLogoLoading
+} from '../components/styles';
+
 import { useDispatch } from 'react-redux';
 import * as usersActions from '../store/users-actions'
+
 
 const AuthLoadingScreen = (props) => {
   useEffect(() => {
@@ -19,19 +26,25 @@ const AuthLoadingScreen = (props) => {
     let response = await AsyncStorage.getItem('userData');
 
     if(response) {
-      props.navigation.navigate('App');
+      setTimeout(() => {props.navigation.navigate('App');}, 1000)
       dispatch(
         usersActions.createsUserState(response)
       );
-    }else{
-      props.navigation.navigate('Auth');
+    }
+    else{
+      setTimeout(() => {props.navigation.navigate('Auth');}, 2500)
     }
   }
 
   return (
-    <View>
+    <FullHeight>
+      <Image
+        source={ require('../media/logo.png') }
+        style={{width: '70%', paddingTop: '20%'}}
+        resizeMode="contain"
+      />
       <ActivityIndicator />
-    </View>
+    </FullHeight>
   );
 }
 

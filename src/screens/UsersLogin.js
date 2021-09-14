@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, Button, Alert} from 'react-native';
+import {Text, View, Button, Pressable, Alert} from 'react-native';
 
 import UsersLoginInput from '../../src/components/UsersLoginInput';
 
@@ -7,6 +7,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as usersActions from '../store/users-actions';
 
 import i18n from '../../i18n';
+
+import {
+  PageTitle,
+  StyledContainer,
+  InnerContainer,
+  StyledButton,
+  StyleTextInput,
+  SubTitle,
+  WrapperStandardButton,
+  StandardButton,
+  StandardButtonText,
+  SecondaryButton,
+  SecondaryButtonText
+} from '../components/styles';
+
+import { Colors } from '../components/styles';
+
+const { primarySaturateDarkest, light } = Colors;
 
 const UsersLogin = (props) => {
   const state = useSelector(state => state);
@@ -25,29 +43,39 @@ const UsersLogin = (props) => {
 
   const renderLogin = () => {
     return (
-      <View>
-        {state.user.failedLoginMessage ? (
-          Alert.alert(
-            "Erro",
-            i18n.t(
-              "firebase.errors.auth." + state.user.failedLoginMessage.split("/")[1]
-            ),
-            [
-              { text: "OK", onPress: () => handleCloseFailedLoginMessage() }
-            ]
-          )
-        ) : null}
-        <UsersLoginInput goApp={() => {goTo('App')}}/>
+        <StyledContainer><PageTitle>Quem é você?</PageTitle>
+          <InnerContainer>
+            
+            
+            <UsersLoginInput goApp={() => {goTo('App')}}/>
 
-        <Text>Não possui uma conta?</Text>
-        <Button
-          title="Cadastrar"
-          testID="cadastrar"
-          onPress={() => {
-            goTo("Signup");}
-          }
-        />
-      </View>
+            <SubTitle>Não possui uma conta?</SubTitle>
+            <WrapperStandardButton>
+              <SecondaryButton
+                title="Cadastrar"
+                testID="cadastrar"
+                onPress={() => {
+                  goTo("Signup");}
+                }
+              >
+                <SecondaryButtonText>Cadastrar</SecondaryButtonText>
+              </SecondaryButton>
+            </WrapperStandardButton>
+
+            {state.user.failedLoginMessage ? (
+            Alert.alert(
+              "Erro",
+              i18n.t(
+                "firebase.errors.auth." + state.user.failedLoginMessage.split("/")[1]
+              ),
+              [
+                { text: "OK", onPress: () => handleCloseFailedLoginMessage() }
+              ]
+            )
+          ) : null}
+          </InnerContainer>
+        </StyledContainer>
+
     )
   }
 

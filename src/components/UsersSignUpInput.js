@@ -6,6 +6,14 @@ import {
   TextInput
 } from 'react-native';
 
+import {
+  StyleTextInput,
+  LabelText,
+  WrapperStandardButton,
+  StandardButton,
+  StandardButtonText
+} from '../components/styles';
+
 import { useDispatch } from 'react-redux';
 
 import * as usersActions from '../store/users-actions'
@@ -33,20 +41,32 @@ const UsersSignupInput= (props) => {
 
   return(
     <View>
-      <Text>E-mail:</Text>
-      <TextInput
+      <LabelText>E-mail:</LabelText>
+      <StyleTextInput
         testID="email"
         onChangeText={captureEmail}
+        placeholder="Seu email"
       />
 
-      <Text>Senha:</Text>
-      <TextInput secureTextEntry={true} testID="senha" onChangeText={capturePassword}/>
-
-      <Button
-        title="Cadastrar"
-        testID="cadastrar-confirmar"
-        onPress={() => { createUser() }}
+      <LabelText>Senha:</LabelText>
+      <StyleTextInput 
+        secureTextEntry={true} 
+        testID="senha" 
+        onChangeText={capturePassword}
+        placeholder="Sua senha"
       />
+
+      <WrapperStandardButton>
+        <StandardButton
+                title="Cadastrar"
+                testID="cadastrar-confirmar"
+                onPress={() => { createUser() }}
+                
+        >
+          <StandardButtonText>Logar</StandardButtonText>
+        </StandardButton>
+      </WrapperStandardButton>
+      
     </View>
   )
 }

@@ -21,6 +21,8 @@
     "expo-status-bar": "~1.0.4",
     "firebase": "8.2.3",
     "formik": "^2.2.9",
+    "i18n-next": "^0.0.4",
+    "i18next": "^20.6.1",
     "ios": "^0.0.1",
     "jest-expo": "^42.0.0",
     "react": "16.13.1",
@@ -57,6 +59,7 @@
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "@testing-library/react-native": "^7.2.0",
+    "@types/styled-components": "^5.1.14",
     "cypress": "^8.3.0",
     "start-server-and-test": "^1.13.1"
   },
