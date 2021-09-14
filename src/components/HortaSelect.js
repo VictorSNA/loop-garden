@@ -11,6 +11,9 @@ import * as usersActions from '../store/users-actions';
 
 import { useSelector } from 'react-redux';
 
+import axios from 'axios';
+
+
 const HortaSelect = (props) => {
   const user = useSelector(state => state.user);
 
@@ -27,13 +30,25 @@ const HortaSelect = (props) => {
     );
   }
 
+  const linkToGarden = () => {
+    let new_url = props.url.replace('info', "register");
+
+    axios.post(new_url, {headers: {Accept: 'application/json'}}, { params: {uid: props.user_uid} })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   return(
     <View>
       <Text>Horta X</Text>
 
       <Button
         title=">"
-        onPress={() => { login() }}
+        onPress={() => { linkToGarden() }}
       />
       </View>
   )
