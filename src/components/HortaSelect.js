@@ -22,6 +22,8 @@ import {
   Colors
 } from './styles';
 
+import axios from 'axios';
+
 const { primarySaturateLight } = Colors;
 
 const HortaSelect = (props) => {
