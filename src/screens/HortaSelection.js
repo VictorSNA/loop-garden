@@ -5,7 +5,10 @@ import {
   FlatList,
   SafeAreaView,
   Text,
-  View
+  View,
+  Linking,
+  Pressable,
+  Image
 } from 'react-native';
 
 import { useSelector } from 'react-redux'
@@ -17,8 +20,15 @@ import HortaSelect from '../components/HortaSelect';
 import {
   StyledContainer,
   PageTitle,
+  SubTitle,
+  WrapperCenterObj,
   Colors
 } from '../components/styles';
+
+const WhatsApp = (text, phone) => {
+  Linking.openURL(`whatsapp://send?text=${text}&phone=${phone}`);
+ }
+
 
 const HortaSelection = (props) => {
   useEffect(() => {
@@ -85,7 +95,43 @@ const HortaSelection = (props) => {
           </>
         )
       :
-        (<PageTitle>Não há hortas em seu wifi</PageTitle>)}
+        (
+          <>
+            <PageTitle>Não há hortas em seu wifi</PageTitle>
+            <WrapperCenterObj>
+              <Image
+                  source={ require('../media/icone-sem-wifi.png') }
+                  resizeMode="contain"
+                />
+            </WrapperCenterObj>
+            <SubTitle
+              style={{textAlign: 'left', paddingHorizontal: '10%'}}
+            >Precisa de um técnico? {"\n"}
+Você tem alguma dúvida?</SubTitle>
+            <WrapperCenterObj>
+              <Pressable
+              onPress={() =>
+                Linking.canOpenURL("whatsapp://send?text=oi").then(supported => {
+                if (supported) {
+                  return Linking.openURL(
+                    "whatsapp://send?phone=5511973102020&text=Oi"
+                  );
+                } else {
+                  return Linking.openURL(
+                    "https://api.whatsapp.com/send?phone=5511973102020&text=Oi"
+                  );
+                }
+              })
+            }
+              >
+                <Image
+                  source={ require('../media/icone-duvida-whatsapp.png') }
+                  resizeMode="cover"
+                />
+              </Pressable>
+            </WrapperCenterObj>
+          </>
+        )}
       </View>
     )
     }

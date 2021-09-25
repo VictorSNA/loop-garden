@@ -4,8 +4,16 @@ import {
   Text,
   Button,
   Alert,
+  Image,
   AsyncStorage
 } from 'react-native';
+import {
+  HomeContainer,
+  WrapperButtonCenter,
+  HomeButton,
+  HomeButtonText,
+  SubTitle
+} from '../components/styles';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -31,7 +39,7 @@ const Homepage = (props) => {
   }
 
   return(
-    <View>
+    <HomeContainer>
       {state.user.successUserCreationMessage ? (
         Alert.alert(
           "Sucesso",
@@ -41,18 +49,39 @@ const Homepage = (props) => {
           ]
         )
       ) : null}
-      <Text>Bem vindo de volta, selecione sua horta para continuar{console.log(state)}</Text>
-      <Button
+      <SubTitle
+        style={{marginTop: 0, borderTopWidth: 0, paddingHorizontal: '10%', textAlign: 'right'}}
+      >Bem vindo de volta, selecione sua horta para continuar{console.log(state)}</SubTitle>
+      <WrapperButtonCenter
+        style={{marginTop: '20%'}}
+      >
+        <HomeButton
+                  title="Lista de Hortas"
+                  onPress={() => { selectionHortas() }}
+        >
+          <Image
+            source={ require('../media/icone-horta-home.png') }
+            resizeMode="cover"
+          />
+          <HomeButtonText>Ver lista de hortas</HomeButtonText>
+        </HomeButton>
+      </WrapperButtonCenter>
+
+      <WrapperButtonCenter
+        style={{marginBottom: '20%'}}
+      >
+        <HomeButton
           title="Usuário"
-          onPress={() => { detalhesUsuarios() }
-          }
-      />
-      <Button
-          title="Lista de Hortas"
-          onPress={() => { selectionHortas() }
-          }
-      />
-    </View>
+          onPress={() => { detalhesUsuarios() }}
+        >
+          <Image
+            source={ require('../media/icone-perfil-home.png') }
+            resizeMode="cover"
+          />
+          <HomeButtonText>Perfil do usuário</HomeButtonText>
+        </HomeButton>
+      </WrapperButtonCenter>
+    </HomeContainer>
   )
 }
 

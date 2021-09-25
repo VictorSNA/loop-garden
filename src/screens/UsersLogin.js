@@ -43,12 +43,10 @@ const UsersLogin = (props) => {
 
   const renderLogin = () => {
     return (
-        <StyledContainer><PageTitle>Quem é você?</PageTitle>
+        <StyledContainer>
+          <PageTitle>Quem é você?</PageTitle>
           <InnerContainer>
-            
-            
             <UsersLoginInput goApp={() => {goTo('App')}}/>
-
             <SubTitle>Não possui uma conta?</SubTitle>
             <WrapperStandardButton>
               <SecondaryButton

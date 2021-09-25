@@ -47,7 +47,6 @@ export const StyledContainer = styled.View`
   flex: 1;
   padding: 18px;
   padding-top: ${StatusBarHeight + 10}px;
-  
 `
 
 export const InnerContainer = styled.View`
@@ -82,6 +81,11 @@ export const SubTitle = styled.Text`
   border-color: ${neutral}
   color: ${dark};
 `
+export const WrapperCenterObj = styled.View`
+  margin-bottom: 40px;
+  padding-top: 100px;
+  align-self: center;
+`
 
 export const StyledFormArea = styled.View`
   width: 90%;
@@ -102,10 +106,10 @@ export const StyleTextInput = styled.TextInput`
   margin-vertical: 3px;
   margin-bottom: 10px;
   border-width: 3px;
-  border-color: ${primarySaturateDarkest};
+  border-color: ${primarySaturateDark};
   background-color: ${white};
 `
-
+//button generic
 export const WrapperStandardButton = styled.View`
   flex-wrap: wrap;
   flex-direction: row-reverse;
@@ -135,7 +139,39 @@ export const SecondaryButtonText = styled.Text`
   font-size: 24px;
   text-transform: uppercase;
 `
+//button home
+export const HomeContainer = styled.View`
+  flex:1;
+  justify-content: center;
+  padding: 18px;
+  padding-top: ${StatusBarHeight + 10}px;
+`
+export const WrapperButtonCenter = styled.View`
+  flex: 1;
+  align-items: center;
+`
+export const HomeButton = styled.Pressable`
+  padding-top: 30px;
+  padding-bottom: 20px;
+  /*padding-horizontal: 25px;*/ /*apagar de outras telas ok*/
+  width: 230px; /*ver em outras telas se ok*/
+  border-radius: 10px;
+  background-color: ${primarySaturateLight};
+  border-top-width: 3px;
+  border-left-width: 3px;
+  border-right-width: 3px;
+  border-bottom-width: 12px;
+  border-color: ${primarySaturateDark};
+  align-items: center;
+`
+export const HomeButtonText = styled.Text`
+margin-top: 30px;
+color: ${dark};
+font-size: 16px;
+text-transform: uppercase;
+`
 
+//inputs
 export const StyledInputLabel = styled.Text`
   font-size: 13px;
   text-aligh: left;
