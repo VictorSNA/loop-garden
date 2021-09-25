@@ -15,7 +15,6 @@ import {
 import { useDispatch } from 'react-redux';
 import * as usersActions from '../store/users-actions'
 
-//import { logo } from '../media/logo.gif';
 
 const AuthLoadingScreen = (props) => {
   useEffect(() => {
