@@ -13,10 +13,10 @@ import HortaSelection from '../screens/HortaSelection';
 // Loading Screens
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 
-const AppStack = createStackNavigator({
+const AppStack = createStackNavigator({ 
   Home: Homepage,
   Hortas: HortaSelection,
-  Details: UsersDetails
+  Detalhes: UsersDetails
 });
 
 const AuthStack = createStackNavigator({

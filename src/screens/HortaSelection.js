@@ -105,10 +105,12 @@ const HortaSelection = (props) => {
                 />
             </WrapperCenterObj>
             <SubTitle
-              style={{textAlign: 'left', paddingHorizontal: '10%'}}
-            >Precisa de um técnico? {"\n"}
+              style={{fontWeight: "normal", textAlign: 'left', paddingHorizontal: '10%', marginBottom: 0, paddingTop: 40}}
+            >Precisa de um técnico?{"\n"}
 Você tem alguma dúvida?</SubTitle>
-            <WrapperCenterObj>
+            <WrapperCenterObj
+            style={{paddingTop: 50}}
+            >
               <Pressable
               onPress={() =>
                 Linking.canOpenURL("whatsapp://send?text=oi").then(supported => {

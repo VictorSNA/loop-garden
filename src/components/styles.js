@@ -71,6 +71,7 @@ export const PageTitle = styled.Text`
 
 export const SubTitle = styled.Text`
   font-size: 24px;
+  font-weight: normal;
   margin-top: 50px;
   margin-bottom: 20px;
   padding-top: 10px;

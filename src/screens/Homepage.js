@@ -12,6 +12,7 @@ import {
   WrapperButtonCenter,
   HomeButton,
   HomeButtonText,
+  PageTitle,
   SubTitle
 } from '../components/styles';
 
@@ -31,7 +32,7 @@ const Homepage = (props) => {
   const state = useSelector(state => state);
 
   const detalhesUsuarios = async () => {
-    props.navigation.navigate('Details');
+    props.navigation.navigate('Detalhes');
   }
 
   const selectionHortas = async () => {
@@ -49,11 +50,12 @@ const Homepage = (props) => {
           ]
         )
       ) : null}
-      <SubTitle
-        style={{marginTop: 0, borderTopWidth: 0, paddingHorizontal: '10%', textAlign: 'right'}}
-      >Bem vindo de volta, selecione sua horta para continuar{console.log(state)}</SubTitle>
+      <PageTitle
+        style={{marginTop: 0, borderTopWidth: 0, paddingHorizontal: '10%', textAlign: 'left'}}
+      >Bem vindo de volta!</PageTitle>
+      <SubTitle>Selecione uma opção abaixo:{console.log(state)}</SubTitle>
       <WrapperButtonCenter
-        style={{marginTop: '20%'}}
+        style={{marginTop: 30}}
       >
         <HomeButton
                   title="Lista de Hortas"
