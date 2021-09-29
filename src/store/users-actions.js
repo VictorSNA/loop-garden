@@ -1,5 +1,4 @@
-import firebase from 'firebase';
-import ENV from '../../env';
+import firebase from 'firebase'; import ENV from '../../env';
 import { AsyncStorage } from 'react-native';
 
 if (!firebase.apps.length)
@@ -7,23 +6,20 @@ if (!firebase.apps.length)
 
 import 'firebase/auth';
 
+const db = firebase.firestore()
 
 export const SUCCESS_ADD_USER = 'SUCCESS_ADD_USER';
 export const FAILURE_ADD_USER = 'FAILURE_ADD_USER';
 export const CLEAR_CREATE_USER_SUCCESS_MESSAGE = 'CLEAR_CREATE_USER_SUCCESS_MESSAGE';
 export const CLEAR_CREATE_USER_FAIL_MESSAGE = 'CLEAR_CREATE_USER_FAIL_MESSAGE';
-
 export const SUCCESS_LOGIN_USER = 'SUCCESS_LOGIN_USER';
 export const FAILURE_LOGIN_USER = 'FAILURE_LOGIN_USER';
 export const CLEAR_FAILURE_LOGIN_ERROR_MESSAGE = 'CLEAR_FAILURE_LOGIN_ERROR_MESSAGE'
-
 export const SUCCESS_DEL_USER = 'SUCCESS_DEL_USER';
-
 export const DESTROY_SESSION = 'DESTROY_SESSION';
-
 export const UPDATES_USER_STATE = 'UPDATES_USER_STATE';
-
 export const FAILURE_DELETE_USER = 'FAILURE_DELETE_USER';
+export const GET_GARDENS = 'GET_GARDENS';
 
 export const createsUserState = (payload) => {
   return async dispatch => {
@@ -144,6 +140,86 @@ export const destroySession = () => {
 
     dispatch({
       type: DESTROY_SESSION, users: []
+    });
+  }
+}
+
+export const getGardens = () => {
+  return async dispatch => {
+    let user = await AsyncStorage.getItem("userData");
+    let userJson = JSON.parse(user);
+
+    db.collection("gardens").doc(userJson.uid)
+    .onSnapshot((doc) => {
+      AsyncStorage.setItem("hortas", JSON.stringify(doc.data()));
+
+      if(doc.data() != undefined) {
+        dispatch({
+          type: GET_GARDENS,
+          payload: {
+            hortas: doc.data()
+          }
+        });
+      }else{
+        dispatch({
+          type: GET_GARDENS,
+          payload: {
+            hortas: []
+          }
+        });
+      }
+    }, (error) => {
+      console.log("Erro ao consultar hortas: " + error);
+      dispatch({
+        type: GET_GARDENS,
+        payload: {
+          hortas: null
+        }
+      });
+    });
+  }
+}
+
+export const deleteGarden = (gardenName) => {
+  return async dispatch => {
+    let user = await AsyncStorage.getItem("userData");
+    let userJson = JSON.parse(user);
+
+    gardenRef = db.collection('gardens').doc(userJson.uid);
+
+    let delQuery = {};
+    delQuery[gardenName] = firebase.firestore.FieldValue.delete();
+
+    gardenRef.update(
+      delQuery
+    );
+
+    gardenRef.onSnapshot((doc) => {
+      AsyncStorage.setItem("hortas", JSON.stringify(doc.data()));
+
+      if(doc.data() != undefined) {
+        dispatch({
+          type: GET_GARDENS,
+          payload: {
+            hortas: doc.data()
+          }
+        });
+      }else{
+        dispatch({
+          type: GET_GARDENS,
+          payload: {
+            hortas: []
+          }
+        });
+      }
+    }, (error) => {
+      console.log("Erro ao consultar hortas: " + error);
+      dispatch({
+        type: GET_GARDENS,
+        payload: {
+          hortas: null
+        }
+      });
     });
   }
 }
