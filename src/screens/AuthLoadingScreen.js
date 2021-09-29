@@ -26,13 +26,17 @@ const AuthLoadingScreen = (props) => {
     let response = await AsyncStorage.getItem('userData');
 
     if(response) {
-      setTimeout(() => {props.navigation.navigate('App');}, 1000)
       dispatch(
         usersActions.createsUserState(response)
       );
+
+      dispatch(
+        usersActions.getGardens()
+      );
+      setTimeout(() => {props.navigation.navigate('App');}, 550);
     }
     else{
-      setTimeout(() => {props.navigation.navigate('Auth');}, 2500)
+      setTimeout(() => {props.navigation.navigate('Auth');}, 550)
     }
   }
 

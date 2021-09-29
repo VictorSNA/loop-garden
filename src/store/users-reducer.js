@@ -16,6 +16,7 @@ export default(state = initialState, action) => {
       )
 
       return {
+        ...state,
         user: user,
         successUserCreationMessage: "Usuário criado com sucesso"
       }
@@ -28,13 +29,11 @@ export default(state = initialState, action) => {
 
     case usersActions.CLEAR_CREATE_USER_SUCCESS_MESSAGE:
       return {
-        ...state,
         successUserCreationMessage: ""
       }
 
     case usersActions.CLEAR_CREATE_USER_FAIL_MESSAGE:
       return {
-        ...state,
         failureUserCreationMessage: ""
       }
 
@@ -84,7 +83,16 @@ export default(state = initialState, action) => {
       )
 
       return {
+        ...state,
         user: user
+      }
+
+    case usersActions.GET_GARDENS:
+      var hortas_payload = action.payload.hortas;
+
+      return {
+        ...state,
+        hortas: hortas_payload
       }
 
     default:

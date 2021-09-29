@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   Button,
   Alert,
+  TextInput,
   AsyncStorage
 } from 'react-native';
 
