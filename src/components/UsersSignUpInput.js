@@ -63,7 +63,7 @@ const UsersSignupInput= (props) => {
                 onPress={() => { createUser() }}
                 
         >
-          <StandardButtonText>Logar</StandardButtonText>
+          <StandardButtonText>Cadastrar</StandardButtonText>
         </StandardButton>
       </WrapperStandardButton>
       

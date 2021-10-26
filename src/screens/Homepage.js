@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import {
-  View,
-  Text,
-  Button,
   Alert,
-  TextInput,
+  Image,
   AsyncStorage
 } from 'react-native';
+
+import {
+  HomeContainer,
+  WrapperButtonCenter,
+  HomeButton,
+  HomeButtonText,
+  PageTitle,
+  SubTitle
+} from '../components/styles';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -24,7 +31,7 @@ const Homepage = (props) => {
   const state = useSelector(state => state);
 
   const detalhesUsuarios = async () => {
-    props.navigation.navigate('Details');
+    props.navigation.navigate('Detalhes');
   }
 
   const selectionHortas = async () => {
@@ -32,7 +39,7 @@ const Homepage = (props) => {
   }
 
   return(
-    <View>
+    <HomeContainer>
       {state.user.successUserCreationMessage ? (
         Alert.alert(
           "Sucesso",
@@ -42,18 +49,40 @@ const Homepage = (props) => {
           ]
         )
       ) : null}
-      <Text>Bem vindo de volta, selecione sua horta para continuar{console.log(state)}</Text>
-      <Button
+      <PageTitle
+        style={{marginTop: 0, borderTopWidth: 0, paddingHorizontal: '10%', textAlign: 'left'}}
+      >Bem vindo de volta!</PageTitle>
+      <SubTitle>Selecione uma opção abaixo:{console.log(state)}</SubTitle>
+      <WrapperButtonCenter
+        style={{marginTop: 30}}
+      >
+        <HomeButton
+                  title="Lista de Hortas"
+                  onPress={() => { selectionHortas() }}
+        >
+          <Image
+            source={ require('../media/icone-horta-home.png') }
+            resizeMode="cover"
+          />
+          <HomeButtonText>Ver lista de hortas</HomeButtonText>
+        </HomeButton>
+      </WrapperButtonCenter>
+
+      <WrapperButtonCenter
+        style={{marginBottom: '20%'}}
+      >
+        <HomeButton
           title="Usuário"
-          onPress={() => { detalhesUsuarios() }
-          }
-      />
-      <Button
-          title="Lista de Hortas"
-          onPress={() => { selectionHortas() }
-          }
-      />
-    </View>
+          onPress={() => { detalhesUsuarios() }}
+        >
+          <Image
+            source={ require('../media/icone-perfil-home.png') }
+            resizeMode="cover"
+          />
+          <HomeButtonText>Perfil do usuário</HomeButtonText>
+        </HomeButton>
+      </WrapperButtonCenter>
+    </HomeContainer>
   )
 }
 

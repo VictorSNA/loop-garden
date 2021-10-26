@@ -4,6 +4,14 @@ import * as usersActions from '../store/users-actions';
 import { useDispatch } from 'react-redux';
 
 import {Text, View, Button, TextInput, Alert} from 'react-native';
+import {
+  PageTitle,
+  SubTitle,
+  LabelText,
+  WrapperCenterObj,
+  StandardButton,
+  StandardButtonText
+} from '../components/styles';
 
 const UserDetails = (props) => {
   const state = useSelector(state => state.user)
@@ -31,10 +39,41 @@ const UserDetails = (props) => {
       <View>
       { state.user ? (
           <View>
-            <Text>Email: </Text>
-            <TextInput placeholder={state.user.email}/>
-            <Button title="Deletar Conta" onPress={() => delUser()}/>
-            <Button title="SAIR" onPress={() => logOut()}/>
+            <PageTitle>Informações do perfil </PageTitle>
+            <SubTitle
+              style={{marginTop: '10%', marginBottom: 0, fontWeight: "normal"}}
+            >Dados do usuário:</SubTitle>
+            <LabelText
+              style={{textAlign: "center", fontWeight: "bold", textTransform: "uppercase", marginTop: 10}}
+            >
+              {state.user.email}
+            </LabelText>
+
+            <SubTitle
+              style={{marginTop: '10%', marginBottom: 0, fontWeight: "normal"}}
+            >Deslogar:</SubTitle>
+              <WrapperCenterObj
+                style={{paddingTop: 30, marginBotom: 20}}
+              >
+              <StandardButton
+                  onPress={() => logOut()}
+              >
+                <StandardButtonText>Deslogar-se</StandardButtonText>
+              </StandardButton>
+            </WrapperCenterObj>
+
+            <SubTitle
+              style={{marginTop: '10%', marginBottom: 0, fontWeight: "normal"}}
+            >Deletar conta:</SubTitle>
+            <WrapperCenterObj
+              style={{paddingTop: 30, marginBotom: 20}}
+            >
+              <StandardButton
+                      onPress={() => delUser()}
+              >
+                <StandardButtonText>Deletar sua conta</StandardButtonText>
+              </StandardButton>
+            </WrapperCenterObj>
           </View>
 
       ): (

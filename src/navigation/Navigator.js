@@ -17,10 +17,10 @@ import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import GardenScreen from '../screens/GardenScreen';
 
 
-const AppStack = createStackNavigator({
+const AppStack = createStackNavigator({ 
   Home: Homepage,
   Hortas: HortaSelection,
-  Details: UsersDetails,
+  Detalhes: UsersDetails,
   GardenScreen: GardenScreen,
   CreateComponent: CreateComponentScreen,
   Component: ComponentScreen
