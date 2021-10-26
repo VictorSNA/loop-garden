@@ -1,12 +1,11 @@
 import React from 'react';
+
 import {
-  View,
-  Text,
-  Button,
   Alert,
   Image,
   AsyncStorage
 } from 'react-native';
+
 import {
   HomeContainer,
   WrapperButtonCenter,

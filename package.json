@@ -13,6 +13,7 @@
   "dependencies": {
     "@expo/ngrok": "^4.1.0",
     "@react-native-community/masked-view": "0.1.10",
+    "@react-native-picker/picker": "1.16.1",
     "@react-navigation/native": "^6.0.2",
     "axios": "^0.21.1",
     "expo": "~42.0.1",
@@ -21,7 +22,6 @@
     "expo-status-bar": "~1.0.4",
     "firebase": "8.2.3",
     "formik": "^2.2.9",
-    "i18n-next": "^0.0.4",
     "i18next": "^20.6.1",
     "ios": "^0.0.1",
     "jest-expo": "^42.0.0",

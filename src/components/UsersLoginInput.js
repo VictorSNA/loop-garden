@@ -24,7 +24,6 @@ import { useSelector } from 'react-redux';
 const UsersLoginInput = (props) => {
   useEffect(() => {
   if(user.user != null){
-    console.log(user.user);
     props.goApp();
   }
   }, user);
