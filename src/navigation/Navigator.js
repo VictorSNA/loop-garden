@@ -9,16 +9,21 @@ import UsersSignup from '../screens/UsersSignup';
 import UsersDetails from '../screens/UserDetails';
 import Homepage from '../screens/Homepage';
 import HortaSelection from '../screens/HortaSelection';
+import CreateComponentScreen from '../screens/CreateComponentScreen';
+import ComponentScreen from '../screens/ComponentScreen';
 
 // Loading Screens
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import GardenScreen from '../screens/GardenScreen';
 
+
 const AppStack = createStackNavigator({
   Home: Homepage,
   Hortas: HortaSelection,
   Details: UsersDetails,
-  GardenScreen: GardenScreen
+  GardenScreen: GardenScreen,
+  CreateComponent: CreateComponentScreen,
+  Component: ComponentScreen
 });
 
 const AuthStack = createStackNavigator({

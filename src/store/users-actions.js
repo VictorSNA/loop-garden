@@ -1,4 +1,5 @@
-import firebase from 'firebase'; import ENV from '../../env';
+import firebase from 'firebase';
+import ENV from '../../env';
 import { AsyncStorage } from 'react-native';
 
 if (!firebase.apps.length)
@@ -20,6 +21,7 @@ export const DESTROY_SESSION = 'DESTROY_SESSION';
 export const UPDATES_USER_STATE = 'UPDATES_USER_STATE';
 export const FAILURE_DELETE_USER = 'FAILURE_DELETE_USER';
 export const GET_GARDENS = 'GET_GARDENS';
+export const ADD_COMPONENT = 'ADD_COMPONENT';
 
 export const createsUserState = (payload) => {
   return async dispatch => {
@@ -185,7 +187,7 @@ export const deleteGarden = (gardenName) => {
     let user = await AsyncStorage.getItem("userData");
     let userJson = JSON.parse(user);
 
-    gardenRef = db.collection('gardens').doc(userJson.uid);
+    let gardenRef = db.collection('gardens').doc(userJson.uid);
 
     let delQuery = {};
     delQuery[gardenName] = firebase.firestore.FieldValue.delete();
@@ -220,6 +222,81 @@ export const deleteGarden = (gardenName) => {
           hortas: null
         }
       });
+    });
+  }
+}
+
+export const addComponent = (gardenName, component, options) => {
+  return async dispatch => {
+    console.log("ADICIONANDO O COMPONENTE " + component + " à horta: " + gardenName);
+    let user = await AsyncStorage.getItem("userData");
+    let userJson = JSON.parse(user);
+
+    let gardenRef = db.collection('gardens').doc(userJson.uid);
+
+    gardenRef.get().then((doc) => {
+      let gardenData = doc.data()[gardenName];
+
+      let updateComponentsList = [...gardenData["components"], {
+        configurations: options["configurations"] || {},
+        measure: options["measures"] || {},
+        type: component
+      }]
+
+      gardenData["components"] = updateComponentsList;
+
+      let addQuery = {};
+      addQuery[gardenName] = gardenData;
+      gardenRef.update(addQuery, { merge: true });
+    });
+  }
+}
+
+export const updateComponent = (gardenName, index, options) => {
+  return async dispatch => {
+    console.log("ATUALIZANDO O COMPONENTE " + index + " da horta: " + gardenName);
+    let user = await AsyncStorage.getItem("userData");
+    let userJson = JSON.parse(user);
+
+    let gardenRef = db.collection('gardens').doc(userJson.uid);
+
+    gardenRef.get().then((doc) => {
+      if(options.configurations) {
+        let gardenData = doc.data()[gardenName];
+
+        let targetComponent = gardenData["components"].filter((garden) => garden == gardenData["components"][index])
+
+        targetComponent[0].configurations = options.configurations;
+
+        gardenData["components"][index] = targetComponent[0];
+
+        console.log(gardenData);
+        let addQuery = {};
+        addQuery[gardenName] = gardenData;
+        gardenRef.update(addQuery, { merge: true });
+      }
+    });
+  }
+}
+
+export const deleteComponent = (gardenName, index, options) => {
+  return async dispatch => {
+    console.log("DELETANDO O COMPONENTE " + index + " da horta: " + gardenName);
+    let user = await AsyncStorage.getItem("userData");
+    let userJson = JSON.parse(user);
+
+    let gardenRef = db.collection('gardens').doc(userJson.uid);
+
+    gardenRef.get().then((doc) => {
+      let gardenData = doc.data()[gardenName];
+
+      let updateComponentsList = gardenData["components"].filter((garden) => garden != gardenData["components"][index])
+  
+      gardenData["components"] = updateComponentsList;
+  
+      let addQuery = {};
+      addQuery[gardenName] = gardenData;
+      gardenRef.update(addQuery, { merge: true });
     });
   }
 }
