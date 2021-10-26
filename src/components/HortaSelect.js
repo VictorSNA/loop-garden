@@ -32,7 +32,6 @@ const HortaSelect = (props) => {
 
     axios.post(new_url, {headers: {Accept: 'application/json'}}, { params: {uid: props.user_uid} })
     .then((response) => {
-      console.log(response);
       dispatch(
         usersActions.getGardens()
       );

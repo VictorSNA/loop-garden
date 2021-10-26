@@ -74,7 +74,6 @@ const HortaSelection = (props) => {
   };
 
   const renderItem = (item) => {
-    console.log(item)
     return (
       <HortaSelect name={item.horta} url={item.item.url} user_uid={state.user.uid}/>
     )
