@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import ENV from '../../env';
-import { AsyncStorage } from 'react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 if (!firebase.apps.length)
   firebase.initializeApp(ENV);
@@ -291,9 +292,9 @@ export const deleteComponent = (gardenName, index, options) => {
       let gardenData = doc.data()[gardenName];
 
       let updateComponentsList = gardenData["components"].filter((garden) => garden != gardenData["components"][index])
-  
+
       gardenData["components"] = updateComponentsList;
-  
+
       let addQuery = {};
       addQuery[gardenName] = gardenData;
       gardenRef.update(addQuery, { merge: true });

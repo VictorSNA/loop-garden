@@ -1,10 +1,9 @@
 /// <reference types="cypress" />
 
-
 describe('Users create an account', () => {
   it('creates successfully', () => {
     cy.visit('/')
-    cy.get('[data-testid=cadastrar]').click()
+    cy.get('[data-testID=cadastrar]').click()
 
     cy.get('[data-testid=email]')
       .should('be.visible')
@@ -14,11 +13,12 @@ describe('Users create an account', () => {
       .should('be.visible')
       .type('pass123456')
 
-    cy.get('[data-testid=cadastrar-confirmar]')
+    cy.get('[data-testID=cadastrar-confirmar]')
       .click()
 
-    cy.contains('Usuário criado com sucesso')
-      .should('be.visible')
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal(`Usuário criado com sucesso`)
+    })
   })
 
   it('does not creates when email is taken', () => {
@@ -36,7 +36,8 @@ describe('Users create an account', () => {
     cy.get('[data-testid=cadastrar-confirmar]')
       .click()
 
-    cy.contains('E-mail já está em uso')
-      .should('be.visible')
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal(`Email já está em uso`)
+    })
   })
 })

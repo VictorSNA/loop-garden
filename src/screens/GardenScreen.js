@@ -1,11 +1,24 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+
 import {
   StyleSheet,
   Text,
   View,
   Button,
-  FlatList
-} from 'react-native'
+  FlatList,
+  Image
+} from 'react-native';
+
+import {
+  StyledContainer,
+  PageTitle,
+  SubTitle,
+  WrapperCenterObj,
+  NormalParagraph,
+  DeleteActionButton,
+  DeleteActionButtonText,
+  DeleteActionButtonIcon
+} from '../components/styles';
 
 import { useDispatch } from 'react-redux';
 
@@ -19,6 +32,8 @@ import {
   RightIcon,
   Colors
 } from '../components/styles';
+
+import { AntDesign } from '@expo/vector-icons';
 
 const GardenScreen = (props) => {
   const { item, goBack } = props.navigation.state.params;
@@ -78,13 +93,34 @@ const GardenScreen = (props) => {
   }
 
   return (
-    <View>
-      <Text>{item.name}</Text>
-      <Button
-          title="desvíncular horta"
+    <StyledContainer>
+      <PageTitle>Horta</PageTitle>
+      <PageTitle>{item.name}</PageTitle>
+
+      <NormalParagraph>Status:</NormalParagraph>
+      <NormalParagraph>horta vínculada
+      <Image
+        source={require('../media/linked.png')}
+        style={{width: 15, height: 15}}
+        resizeMode="contain"
+      />
+      </NormalParagraph>
+
+      <DeleteActionButton style={{marginTop: 40, minWidth: '80%'}}
           onPress={() => { unlinkGarden() }
           }
-      />
+      >
+        <DeleteActionButtonText>
+          desvíncular horta
+        </DeleteActionButtonText>
+        <DeleteActionButtonIcon>
+          <Image
+            source={require('../media/unlinked.png')}
+            style={{width: 15, height: 15}}
+            resizeMode="contain"
+          />
+        </DeleteActionButtonIcon>
+      </DeleteActionButton>
 
       <Text>adicionados</Text>
       <FlatList
@@ -108,7 +144,7 @@ const GardenScreen = (props) => {
           onPress={() => { addComponent() }
           }
       />
-    </View>
+    </StyledContainer>
   )
 }
 

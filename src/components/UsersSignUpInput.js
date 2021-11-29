@@ -49,9 +49,9 @@ const UsersSignupInput= (props) => {
       />
 
       <LabelText>Senha:</LabelText>
-      <StyleTextInput 
-        secureTextEntry={true} 
-        testID="senha" 
+      <StyleTextInput
+        secureTextEntry={true}
+        testID="senha"
         onChangeText={capturePassword}
         placeholder="Sua senha"
       />
@@ -61,12 +61,10 @@ const UsersSignupInput= (props) => {
                 title="Cadastrar"
                 testID="cadastrar-confirmar"
                 onPress={() => { createUser() }}
-                
         >
           <StandardButtonText>Cadastrar</StandardButtonText>
         </StandardButton>
       </WrapperStandardButton>
-      
     </View>
   )
 }
