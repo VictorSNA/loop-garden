@@ -48,6 +48,7 @@ const UsersLogin = (props) => {
           <InnerContainer>
             <UsersLoginInput goApp={() => {goTo('App')}}/>
             <SubTitle>Não possui uma conta?</SubTitle>
+            
             <WrapperStandardButton>
               <SecondaryButton
                 title="Cadastrar"
@@ -55,10 +56,16 @@ const UsersLogin = (props) => {
                 onPress={() => {
                   goTo("Signup");}
                 }
+                style={({ pressed }) => ({
+                  opacity: pressed
+                    ? .7
+                    : 1
+                })}
               >
                 <SecondaryButtonText>Cadastrar</SecondaryButtonText>
               </SecondaryButton>
             </WrapperStandardButton>
+
 
             {state.user.failedLoginMessage ? (
             Alert.alert(
@@ -71,6 +78,7 @@ const UsersLogin = (props) => {
               ]
             )
           ) : null}
+
           </InnerContainer>
         </StyledContainer>
 

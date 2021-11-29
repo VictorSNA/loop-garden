@@ -168,6 +168,12 @@ Você tem alguma dúvida?</SubTitle>
                 }
               })
             }
+                style={({ pressed }) => ({
+                  opacity: pressed
+                    ? .7
+                    : 1
+                })}
+
               >
                 <Image
                   source={ require('../media/icone-duvida-whatsapp.png') }

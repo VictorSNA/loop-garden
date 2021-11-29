@@ -61,7 +61,11 @@ const UsersSignupInput= (props) => {
                 title="Cadastrar"
                 testID="cadastrar-confirmar"
                 onPress={() => { createUser() }}
-                
+                style={({ pressed }) => ({
+                  opacity: pressed
+                    ? .7
+                    : 1
+                })}
         >
           <StandardButtonText>Cadastrar</StandardButtonText>
         </StandardButton>

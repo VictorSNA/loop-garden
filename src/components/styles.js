@@ -21,7 +21,9 @@ export const Colors = {
   gray: '#838993',
   white: '#FFFFFF',
   redDark: '#A23E34',
+  redDarkHov: '#A20000',
   darkGrey: '#686D74',
+  darkGreyHov: '#787D84',
   help: '#097395'
 }
 
@@ -43,7 +45,7 @@ const {
   help
  } = Colors;
 
-export const StyledContainer = styled.View`
+export const StyledContainer = styled.ScrollView`
   flex: 1;
   padding: 18px;
   padding-top: ${StatusBarHeight + 10}px;
@@ -51,9 +53,8 @@ export const StyledContainer = styled.View`
 
 export const InnerContainer = styled.View`
   flex: 1;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
-  justify-content: center;
 `
 
 //export const PageLogo = styled.Image`
@@ -62,15 +63,16 @@ export const InnerContainer = styled.View`
 //`
 
 export const PageTitle = styled.Text`
-  font-size: 40px;
+  font-size: 30px;
   text-align: center;
   font-weight: bold;
   padding-top: 20px;
+  padding-bottom: 50px;
   color: ${dark};
 `
 
 export const SubTitle = styled.Text`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: normal;
   margin-top: 50px;
   margin-bottom: 20px;

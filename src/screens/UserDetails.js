@@ -4,13 +4,16 @@ import * as usersActions from '../store/users-actions';
 import { useDispatch } from 'react-redux';
 
 import {Text, View, Button, TextInput, Alert} from 'react-native';
+
 import {
+  StyledContainer,
   PageTitle,
   SubTitle,
   LabelText,
   WrapperCenterObj,
   StandardButton,
-  StandardButtonText
+  StandardButtonText,
+  Colors
 } from '../components/styles';
 
 const UserDetails = (props) => {
@@ -36,7 +39,7 @@ const UserDetails = (props) => {
 
   const renderUserInfo = () => {
     return(
-      <View>
+      <StyledContainer>
       { state.user ? (
           <View>
             <PageTitle>Informações do perfil </PageTitle>
@@ -57,6 +60,13 @@ const UserDetails = (props) => {
               >
               <StandardButton
                   onPress={() => logOut()}
+                  style={
+                    ({ pressed }) => ({
+                      backgroundColor: pressed
+                      ? Colors.darkGreyHov
+                      : Colors.darkGrey
+                  })
+                }
               >
                 <StandardButtonText>Deslogar-se</StandardButtonText>
               </StandardButton>
@@ -69,7 +79,14 @@ const UserDetails = (props) => {
               style={{paddingTop: 30, marginBotom: 20}}
             >
               <StandardButton
-                      onPress={() => delUser()}
+                onPress={() => delUser()}
+                style={
+                  ({ pressed }) => ({
+                    backgroundColor: pressed
+                    ? Colors.redDarkHov
+                    : Colors.redDark
+                })
+              }
               >
                 <StandardButtonText>Deletar sua conta</StandardButtonText>
               </StandardButton>
@@ -85,7 +102,7 @@ const UserDetails = (props) => {
           ]
         )
       )}
-      </View>
+      </StyledContainer>
     );
   }
 
