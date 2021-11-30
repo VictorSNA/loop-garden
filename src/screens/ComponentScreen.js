@@ -32,6 +32,7 @@ const GardenScreen = (props) => {
     dispatch(
       usersActions.updateComponent(gardenName, component, options)
     );
+    props.navigation.goBack();
   }
 
 

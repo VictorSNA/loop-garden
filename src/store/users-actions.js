@@ -240,7 +240,7 @@ export const addComponent = (gardenName, component, options) => {
 
       let updateComponentsList = [...gardenData["components"], {
         configurations: options["configurations"] || {},
-        measure: options["measures"] || {},
+        measures: options["measures"] || {},
         type: component
       }]
 

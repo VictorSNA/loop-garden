@@ -36,13 +36,14 @@ const GardenScreen = (props) => {
     dispatch(
       usersActions.addComponent(gardenName, component, options)
     );
+    props.navigation.goBack();
   }
 
   const setDefaultConf = () => {
     let params = props.navigation.state.params;
     if(params.component == "humidity_sensor") {
       setConfigurations({"check_humidity": 5000});
-      setMeasures({humidity: 1000});
+      setMeasures({humidity: 100});
     } else {
       setConfigurations({"open_humidity_below": 600});
       setMeasures({open: false});
@@ -106,6 +107,4 @@ const GardenScreen = (props) => {
   )
 }
 
-export default GardenScreen
-
-const styles = StyleSheet.create({})
+export default GardenScreen;
