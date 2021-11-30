@@ -1,27 +1,39 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   Button,
-  FlatList
-} from 'react-native'
-
+  FlatList,
+  Image
+} from 'react-native';
+import {
+  StyledContainer,
+  PageTitle,
+  SubTitle,
+  WrapperCenterObj,
+  NormalParagraph,
+  DeleteActionButton,
+  DeleteActionButtonText,
+  DeleteActionButtonIcon,
+  PageHeader,
+  PageIcon
+} from '../components/styles';
 import { useDispatch } from 'react-redux';
-
 import * as usersActions from '../store/users-actions';
-
 import {Picker} from '@react-native-picker/picker';
-
 import { EvilIcons } from '@expo/vector-icons';
-
 import {
   RightIcon,
   Colors
 } from '../components/styles';
+import { useSelector } from 'react-redux'
 
 const GardenScreen = (props) => {
+  const state = useSelector(state => state.user);
+
   const { item, goBack } = props.navigation.state.params;
+  const horta = state.hortas[item.name];
 
   const dispatch = useDispatch();
 
@@ -35,21 +47,21 @@ const GardenScreen = (props) => {
 
   const addComponent = () => {
     if(selectedComponent == 'humiditysensor') {
-      props.navigation.navigate('CreateComponent', {component: 'humidity_sensor', gardenName: item.name});
+      props.navigation.navigate('CreateComponent', {component: 'humidity_sensor', gardenName: horta.name});
     }else if(selectedComponent == 'solenoide') {
-      props.navigation.navigate('CreateComponent', {component: 'solenoide', gardenName: item.name});
+      props.navigation.navigate('CreateComponent', {component: 'solenoide', gardenName: horta.name});
     }else {
       alert('Nenhum componente foi escolhido')
     }
   }
 
   const goToComponent = (componentData) => {
-    props.navigation.navigate('Component', {component: componentData, gardenName: item.name});
+    props.navigation.navigate('Component', {component: componentData, gardenName: horta.name});
   }
 
   const deleteComponent = (index) => {
     dispatch(
-      usersActions.deleteComponent(item.name, index)
+      usersActions.deleteComponent(horta.name, index)
     );
   };
 
@@ -78,19 +90,54 @@ const GardenScreen = (props) => {
   }
 
   return (
-    <View>
-      <Text>{item.name}</Text>
-      <Button
-          title="desvíncular horta"
+    <StyledContainer>
+      <PageHeader>
+        <PageTitle>Horta {horta.name}</PageTitle>
+        <PageIcon>
+          <Image
+            source={ require('../media/icone-horta-home.png') }
+            resizeMode="contain"
+          /> 
+        </PageIcon>
+      </PageHeader>
+
+
+      <NormalParagraph>Umidade: {
+        Object.keys(horta.components).map(
+          (key) => horta.components[key].type == "humidity_sensor" ? horta.components[key].measures.humidity + "%": ""
+        )
+      }</NormalParagraph>
+
+      <NormalParagraph>Status:</NormalParagraph>
+      <NormalParagraph>{ horta.linked ? "horta vínculada" : "horta desvínculada"}
+      <Image
+        source={require('../media/linked.png')}
+        style={{width: 15, height: 15}}
+        resizeMode="contain"
+      />
+      </NormalParagraph>
+
+      <DeleteActionButton style={{marginTop: 40, minWidth: '80%'}}
           onPress={() => { unlinkGarden() }
           }
-      />
+      >
+        <DeleteActionButtonText>
+          desvíncular horta
+        </DeleteActionButtonText>
+        <DeleteActionButtonIcon>
+          <Image
+            source={require('../media/unlinked.png')}
+            style={{width: 15, height: 15}}
+            resizeMode="contain"
+          />
+        </DeleteActionButtonIcon>
+      </DeleteActionButton>
 
       <Text>adicionados</Text>
       <FlatList
-            data={item.components}
+            data={horta.components}
             renderItem={(data) => renderItem(data)}
-            keyExtractor={item.type}
+            keyExtractor={horta.type}
           />
 
       <Picker
@@ -108,7 +155,7 @@ const GardenScreen = (props) => {
           onPress={() => { addComponent() }
           }
       />
-    </View>
+    </StyledContainer>
   )
 }
 

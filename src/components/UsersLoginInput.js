@@ -24,9 +24,9 @@ import { useSelector } from 'react-redux';
 
 const UsersLoginInput = (props) => {
   useEffect(() => {
-  if(user.user != null){
-    props.goApp();
-  }
+    if(user.user != null){
+      props.goApp();
+    }
   }, user);
 
   const user = useSelector(state => state.user);
@@ -50,26 +50,28 @@ const UsersLoginInput = (props) => {
 
   return(
     <View>
-      <LabelText>Email:</LabelText>
-      <StyleTextInput
-        testID=""
-        onChangeText={captureEmail}
-        placeholder="Seu email"
-      />
+    <LabelText>Email:</LabelText>
+    <StyleTextInput
+    testID="email-login-input"
+    onChangeText={captureEmail}
+    placeholder="Seu email"
+    />
 
-      <LabelText
-        style={{marginTop: 10}}
-      >Senha:</LabelText>
-      <StyleTextInput
-        testID=""
-        secureTextEntry={true}
-        onChangeText={capturePassword}
-        placeholder="Sua senha"
-      />
+
+    <LabelText
+    style={{marginTop: 10}}
+    >Senha:</LabelText>
+    <StyleTextInput
+    testID="password-login-input"
+    secureTextEntry={true}
+    onChangeText={capturePassword}
+    placeholder="Sua senha"
+    />
 
       <WrapperStandardButton>
         <StandardButton
         onPress={() => { login() }}
+        testID="button-login"
         style={({ pressed }) => ({
           opacity: pressed
             ? .7
@@ -79,8 +81,7 @@ const UsersLoginInput = (props) => {
           <StandardButtonText>Logar</StandardButtonText>
         </StandardButton>
       </WrapperStandardButton>
-
-      </View>
+    </View>
   )
 }
 

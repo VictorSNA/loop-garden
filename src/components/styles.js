@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { View, Text, Image, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
 
@@ -92,11 +92,6 @@ export const WrapperCenterObj = styled.View`
 
 export const StyledFormArea = styled.View`
   width: 90%;
-`
-
-export const LabelText = styled.Text`
- font-size: 20px;
- font-weight: bold;
 `
 
 export const StyleTextInput = styled.TextInput`
@@ -213,4 +208,49 @@ export const HortaCard = styled.View`
   border-bottom-width: 1px;
   border-color: ${primaryPastel};
   border-style: dashed;
+`
+
+// Texts
+export const LabelText = styled.Text`
+ font-size: 20px;
+ font-weight: bold;
+`
+
+export const NormalParagraph = styled.Text`
+ font-size: 16px;
+`
+
+// Actions buttons
+export const DeleteActionButton = styled.Pressable`
+  padding: 7px 20px;
+  border-radius: 3px;
+  background-color: ${complementary};
+  margin: 0 auto;
+  flex-direction: row;
+`
+
+export const DeleteActionButtonText = styled.Text`
+  color: ${dark};
+  font-size: 20px;
+  text-transform: none;
+  width: 90%;
+`
+
+export const DeleteActionButtonIcon = styled.View`
+  color: ${dark};
+  font-size: 20px;
+  width: 10%;
+  text-align: right;
+`
+export const PageHeader = styled.View`
+  color: ${dark};
+  font-size: 20px;
+  width: 10%;
+  text-align: right;
+`
+export const PageIcon = styled.View`
+  color: ${dark};
+  font-size: 20px;
+  width: 10%;
+  text-align: right;
 `

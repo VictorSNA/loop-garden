@@ -2,9 +2,10 @@ import React from 'react';
 
 import {
   Alert,
-  Image,
-  AsyncStorage
+  Image
 } from 'react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   HomeContainer,
@@ -58,6 +59,7 @@ const Homepage = (props) => {
       >
         <HomeButton
                   title="Lista de Hortas"
+                  testID="view-gardens"
                   onPress={() => { selectionHortas() }}
                   style={({ pressed }) => ({
                     opacity: pressed

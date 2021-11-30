@@ -22,7 +22,8 @@ import {
   PageTitle,
   SubTitle,
   WrapperCenterObj,
-  Colors
+  Colors,
+  LabelText
 } from '../components/styles';
 
 const WhatsApp = (text, phone) => {
@@ -62,6 +63,7 @@ const HortaSelection = (props) => {
   const getHortasFromNetwork = () => {
     let base_ip = '192.168.1.';
     let max_ip = 255;
+
     for(var i = 1; i < max_ip; i++) {
       let url = 'http://';
       url += base_ip;
@@ -70,16 +72,20 @@ const HortaSelection = (props) => {
       url += '/info';
       axios.get(url)
         .then((response) => {
+          console.log("Escaneando: " + url);
           if(response.data.data.alive) {
             let horta_name = response.data.data.arduino_id;
+            console.log("achei")
+            console.log(!linkedGarden(horta_name))
             if(!linkedGarden(horta_name)) {
               setData(previous =>[...previous, {horta: horta_name, url: url}]);
             }
           }
         })
         .catch((error) => {
+          console.log("Nada encontrado em: " + url);
         })
-        if(i == max_ip -1){ setLoadingHortas(false); }
+      if(i == max_ip -1){ setLoadingHortas(false); }
     }
   };
 
@@ -96,7 +102,7 @@ const HortaSelection = (props) => {
   }
 
   const removeItemFromState = (item) => {
-    setState({data: data.filter(function(horta) { 
+    setState({data: data.filter(function(horta) {
       return horta !== item
     })});
   }
@@ -112,7 +118,7 @@ const HortaSelection = (props) => {
           <>
           <PageTitle>Selecione uma horta</PageTitle>
 
-          <Text>Vínculadas</Text>
+          <LabelText>vínculadas</LabelText>
           { state.hortas ? (
             <>
            <SafeAreaView>
@@ -125,7 +131,7 @@ const HortaSelection = (props) => {
            </>
           ) : <Text>Não há outras hortas</Text>}
 
-          <Text>Desvínculadas</Text>
+          <LabelText>desvínculadas</LabelText>
           { data.length ?
           <SafeAreaView>
           <FlatList
