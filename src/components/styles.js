@@ -240,3 +240,15 @@ export const DeleteActionButtonIcon = styled.View`
   width: 10%;
   text-align: right;
 `
+export const PageHeader = styled.View`
+  color: ${dark};
+  font-size: 20px;
+  width: 10%;
+  text-align: right;
+`
+export const PageIcon = styled.View`
+  color: ${dark};
+  font-size: 20px;
+  width: 10%;
+  text-align: right;
+`

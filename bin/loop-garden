@@ -14,10 +14,10 @@ case $COMMAND in
     run /bin/bash
     ;;
   start)
-    docker-compose up --force
+    docker-compose up
     ;;
   setup)
-    docker-compose build --build-arg uid=$EUID
+    docker-compose build --build-arg uid=$EUID --force-rm
     ;;
 esac
 exit 0
