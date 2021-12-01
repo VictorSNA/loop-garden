@@ -23,7 +23,7 @@ import {
   SubTitle,
   WrapperCenterObj,
   Colors,
-  LabelText
+  LabelText,
 } from '../components/styles';
 
 const WhatsApp = (text, phone) => {

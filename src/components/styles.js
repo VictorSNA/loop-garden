@@ -227,30 +227,53 @@ export const DeleteActionButton = styled.Pressable`
   background-color: ${complementary};
   margin: 0 auto;
   flex-direction: row;
+  align-items: center;
+  flex: 1;
+  min-width: 100%;
+  justify-content: center;
 `
 
 export const DeleteActionButtonText = styled.Text`
-  color: ${dark};
-  font-size: 20px;
-  text-transform: none;
-  width: 90%;
+  color: ${white};
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
 `
 
 export const DeleteActionButtonIcon = styled.View`
-  color: ${dark};
   font-size: 20px;
-  width: 10%;
   text-align: right;
+  right: -10;
+  line-height: 90px;
 `
 export const PageHeader = styled.View`
   color: ${dark};
+  flex-direction: row;
   font-size: 20px;
-  width: 10%;
+  width: 100%;
   text-align: right;
 `
+
+export const PageTitleShort = styled.Text`
+  color: ${dark};
+  font-size: 32px;
+  width: 70%;
+  text-align: left;
+  font-weight: bold;
+`
+
 export const PageIcon = styled.View`
   color: ${dark};
   font-size: 20px;
-  width: 10%;
+  width: 30%;
   text-align: right;
+`
+
+export const GreenHighlighted = styled.Text`
+  color: ${primarySaturateDarkest};
+  font-weight: bold;
+`
+
+export const Bold = styled.Text`
+  font-weight: bold;
 `
