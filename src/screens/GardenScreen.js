@@ -38,11 +38,11 @@ const GardenScreen = (props) => {
   const dispatch = useDispatch();
 
   const unlinkGarden = () => {
-    props.navigation.navigate('Home');
-
     dispatch(
       usersActions.deleteGarden(horta.name)
     );
+
+    props.navigation.navigate('Home');
   }
 
   const addComponent = () => {
@@ -93,7 +93,7 @@ const GardenScreen = (props) => {
     );
   }
 
-  return (
+  return horta ? (
     <StyledContainer>
       <PageHeader>
         <PageTitleShort>Horta {horta.name}</PageTitleShort>
@@ -170,8 +170,21 @@ const GardenScreen = (props) => {
         </HortaCard>
       </TouchableOpacity>
 
-
     </StyledContainer>
+  ) : (
+    <StyledContainer>
+    <PageHeader>
+      <PageTitleShort>Horta não existe</PageTitleShort>
+      <PageIcon>
+        <Image
+          source={ require('../media/icone-horta-home.png') }
+          resizeMode="contain"
+          style={{width: 45, height: 45}}
+        /> 
+      </PageIcon>
+    </PageHeader>
+
+  </StyledContainer>
   )
 }
 
