@@ -23,7 +23,7 @@ const AppStack = createStackNavigator({
   Detalhes: UsersDetails,
   GardenScreen: GardenScreen,
   CreateComponent: CreateComponentScreen,
-  Component: ComponentScreen
+  Component: ComponentScreen,
 });
 
 const AuthStack = createStackNavigator({

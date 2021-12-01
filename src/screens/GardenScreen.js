@@ -1,33 +1,33 @@
 import React, {useState} from 'react';
 import {
-  StyleSheet,
   Text,
-  View,
-  Button,
   FlatList,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import {
   StyledContainer,
-  PageTitle,
-  SubTitle,
-  WrapperCenterObj,
+  PageTitleShort,
   NormalParagraph,
   DeleteActionButton,
   DeleteActionButtonText,
   DeleteActionButtonIcon,
   PageHeader,
-  PageIcon
+  PageIcon,
+  GreenHighlighted,
+  HortaCard,
+  LeftIcon,
+  Bold
 } from '../components/styles';
 import { useDispatch } from 'react-redux';
 import * as usersActions from '../store/users-actions';
 import {Picker} from '@react-native-picker/picker';
-import { EvilIcons } from '@expo/vector-icons';
 import {
   RightIcon,
   Colors
 } from '../components/styles';
 import { useSelector } from 'react-redux'
+import { AntDesign } from '@expo/vector-icons';
 
 const GardenScreen = (props) => {
   const state = useSelector(state => state.user);
@@ -39,10 +39,10 @@ const GardenScreen = (props) => {
 
   const unlinkGarden = () => {
     dispatch(
-      usersActions.deleteGarden(item.name)
+      usersActions.deleteGarden(horta.name)
     );
 
-    props.navigation.goBack();
+    props.navigation.navigate('Home');
   }
 
   const addComponent = () => {
@@ -59,57 +59,65 @@ const GardenScreen = (props) => {
     props.navigation.navigate('Component', {component: componentData, gardenName: horta.name});
   }
 
-  const deleteComponent = (index) => {
-    dispatch(
-      usersActions.deleteComponent(horta.name, index)
-    );
-  };
+
 
   const [selectedComponent, setSelectedComponent] = useState('humiditysensor');
 
   const renderItem = (data) => {
     return(
-      <View style={{borderRadius: 30, padding: 5}}>
+      <>
+        <HortaCard style={{marginTop: 15}}>
+        <LeftIcon style={{flex: 1}}>
+          <Image
+            source={require('../media/linked.png')}
+            style={{width: '30%', height: 20}}
+            resizeMode="contain"
+          />
+        </LeftIcon>
 
-          <Text onPress={() => goToComponent(data)}>Dispositivo: {data.item.type}</Text>
-          <RightIcon
-          onPress={() => {
-            deleteComponent(data.index);
-          }}
-            style={{borderRadius: 30, padding: 5}}
+        <Text style={{flex: 5}}>{data.item.type == "humidity_sensor" ? "Sensor de umidade" : "Válvula solenoide" }</Text>
+
+
+        <RightIcon
+          onPress={() => {goToComponent(data)}}
+            style={{borderRadius: 30, padding: 5, backgroundColor: Colors.primarySaturateLight}}
         >
-          <EvilIcons
-            name="trash"
-            size={20}
-            color={Colors.complementary}
+          <AntDesign
+            name="right"
+            size={15}
+            color="black"
           />
         </RightIcon>
-
-      </View>
+        </HortaCard>
+      </>
     );
   }
 
-  return (
+  return horta ? (
     <StyledContainer>
       <PageHeader>
-        <PageTitle>Horta {horta.name}</PageTitle>
+        <PageTitleShort>Horta {horta.name}</PageTitleShort>
         <PageIcon>
           <Image
             source={ require('../media/icone-horta-home.png') }
             resizeMode="contain"
+            style={{width: 45, height: 45}}
           /> 
         </PageIcon>
       </PageHeader>
 
 
-      <NormalParagraph>Umidade: {
+      <NormalParagraph style={{marginBottom: 70, flex: 1, flexDirection: 'column'}}>
+        <Text>Umidade: </Text>
+        <GreenHighlighted>{
         Object.keys(horta.components).map(
           (key) => horta.components[key].type == "humidity_sensor" ? horta.components[key].measures.humidity + "%": ""
         )
-      }</NormalParagraph>
+      }</GreenHighlighted></NormalParagraph>
 
       <NormalParagraph>Status:</NormalParagraph>
-      <NormalParagraph>{ horta.linked ? "horta vínculada" : "horta desvínculada"}
+      <NormalParagraph>
+      <GreenHighlighted>{ horta.linked ? "horta vínculada " : "horta desvínculada "}</GreenHighlighted>
       <Image
         source={require('../media/linked.png')}
         style={{width: 15, height: 15}}
@@ -117,7 +125,7 @@ const GardenScreen = (props) => {
       />
       </NormalParagraph>
 
-      <DeleteActionButton style={{marginTop: 40, minWidth: '80%'}}
+      <DeleteActionButton style={{marginTop: 10}}
           onPress={() => { unlinkGarden() }
           }
       >
@@ -133,14 +141,18 @@ const GardenScreen = (props) => {
         </DeleteActionButtonIcon>
       </DeleteActionButton>
 
-      <Text>adicionados</Text>
+      <NormalParagraph style={{textAlign: 'center', marginTop: 70}}>DISPOSITIVOS</NormalParagraph>
+
       <FlatList
             data={horta.components}
             renderItem={(data) => renderItem(data)}
             keyExtractor={horta.type}
           />
 
+      <NormalParagraph style={{textAlign: 'center', marginTop: 70}}>ADICIONAR NOVO DISPOSITIVO</NormalParagraph>
+
       <Picker
+        style={{marginTop: 20}}
         selectedValue='humiditySensor'
         onValueChange={(itemValue, itemIndex) =>
           setSelectedComponent(itemValue)
@@ -149,16 +161,31 @@ const GardenScreen = (props) => {
         <Picker.Item label="Válvula solenoide" value="solenoide" />
       </Picker>
 
+      <TouchableOpacity onPress={() => {addComponent()}}>
+        <HortaCard
+          style={
+          {marginTop: 15, backgroundColor: Colors.primarySaturateDarkest, flex: 1, justifyContent: 'center', flexDirection: 'row', alignItems: 'center'}
+          }>
+          <Bold style={{fontSize: 16, color: 'white'}}>ADICIONAR DISPOSITIVO</Bold>
+        </HortaCard>
+      </TouchableOpacity>
 
-      <Button
-          title="adicionar dispositivos"
-          onPress={() => { addComponent() }
-          }
-      />
     </StyledContainer>
+  ) : (
+    <StyledContainer>
+    <PageHeader>
+      <PageTitleShort>Horta não existe</PageTitleShort>
+      <PageIcon>
+        <Image
+          source={ require('../media/icone-horta-home.png') }
+          resizeMode="contain"
+          style={{width: 45, height: 45}}
+        /> 
+      </PageIcon>
+    </PageHeader>
+
+  </StyledContainer>
   )
 }
 
-export default GardenScreen
-
-const styles = StyleSheet.create({})
+export default GardenScreen;

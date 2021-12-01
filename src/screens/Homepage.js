@@ -51,16 +51,21 @@ const Homepage = (props) => {
         )
       ) : null}
       <PageTitle
-        style={{marginTop: 0, borderTopWidth: 0, paddingHorizontal: '10%', textAlign: 'left'}}
-      >Bem vindo de volta!</PageTitle>
+        style={{marginTop: 0, borderTopWidth: 0, paddingHorizontal: '10%', paddingBottom: 0}}
+      >Bem vindo!</PageTitle>
       <SubTitle>Selecione uma opção abaixo:{console.log(state)}</SubTitle>
       <WrapperButtonCenter
-        style={{marginTop: 30}}
+        style={{marginTop: 10}}
       >
         <HomeButton
                   title="Lista de Hortas"
                   testID="view-gardens"
                   onPress={() => { selectionHortas() }}
+                  style={({ pressed }) => ({
+                    opacity: pressed
+                      ? .7
+                      : 1
+                  })}
         >
           <Image
             source={ require('../media/icone-horta-home.png') }
@@ -71,11 +76,16 @@ const Homepage = (props) => {
       </WrapperButtonCenter>
 
       <WrapperButtonCenter
-        style={{marginBottom: '20%'}}
+        style={{marginBottom: 0}}
       >
         <HomeButton
           title="Usuário"
           onPress={() => { detalhesUsuarios() }}
+          style={({ pressed }) => ({
+            opacity: pressed
+              ? .7
+              : 1
+          })}
         >
           <Image
             source={ require('../media/icone-perfil-home.png') }

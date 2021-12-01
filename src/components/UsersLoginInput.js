@@ -12,7 +12,8 @@ import {
   LabelText,
   WrapperStandardButton,
   StandardButton,
-  StandardButtonText
+  StandardButtonText,
+  Colors
 } from '../components/styles';
 
 import { useDispatch } from 'react-redux';
@@ -56,6 +57,7 @@ const UsersLoginInput = (props) => {
     placeholder="Seu email"
     />
 
+
     <LabelText
     style={{marginTop: 10}}
     >Senha:</LabelText>
@@ -66,15 +68,19 @@ const UsersLoginInput = (props) => {
     placeholder="Sua senha"
     />
 
-    <WrapperStandardButton>
-    <StandardButton
-    testID="button-login"
-    onPress={() => { login() }}
-    >
-
-    <StandardButtonText>Logar</StandardButtonText>
-    </StandardButton>
-    </WrapperStandardButton>
+      <WrapperStandardButton>
+        <StandardButton
+        onPress={() => { login() }}
+        testID="button-login"
+        style={({ pressed }) => ({
+          opacity: pressed
+            ? .7
+            : 1
+        })}
+        >
+          <StandardButtonText>Logar</StandardButtonText>
+        </StandardButton>
+      </WrapperStandardButton>
     </View>
   )
 }

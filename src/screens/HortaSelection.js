@@ -23,7 +23,7 @@ import {
   SubTitle,
   WrapperCenterObj,
   Colors,
-  LabelText
+  LabelText,
 } from '../components/styles';
 
 const WhatsApp = (text, phone) => {
@@ -174,6 +174,12 @@ Você tem alguma dúvida?</SubTitle>
                 }
               })
             }
+                style={({ pressed }) => ({
+                  opacity: pressed
+                    ? .7
+                    : 1
+                })}
+
               >
                 <Image
                   source={ require('../media/icone-duvida-whatsapp.png') }

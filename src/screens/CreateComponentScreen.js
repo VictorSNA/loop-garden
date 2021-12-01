@@ -3,15 +3,25 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  Button,
+  Image,
+  TouchableOpacity
 } from 'react-native'
 
 import {
+  StyledContainer,
   StyleTextInput,
-  LabelText,
-  WrapperStandardButton,
-  StandardButton,
-  StandardButtonText
+  DeleteActionButton,
+  DeleteActionButtonText,
+  DeleteActionButtonIcon,
+  PageHeader,
+  PageTitleShort,
+  PageIcon,
+  NormalParagraph,
+  GreenHighlighted,
+  Bold,
+  Colors,
+  HortaCard
 } from '../components/styles';
 
 import { useDispatch } from 'react-redux';
@@ -71,39 +81,77 @@ const GardenScreen = (props) => {
     if(params.component == 'humidity_sensor') {
       return (
         <>
-          <Text>Novo Sensor de Umidade</Text>
-          <Text>Medir umidade do solo a cada quantos segundos?</Text>
+          <PageHeader>
+            <PageTitleShort>Novo Sensor de Umidade</PageTitleShort>
+            <PageIcon>
+              <Image
+                source={ require('../media/icone-horta-home.png') }
+                resizeMode="contain"
+                style={{width: 45, height: 45}}
+              /> 
+            </PageIcon>
+          </PageHeader>
+
+          <NormalParagraph style={{width: '60%', textAlign: 'justify', marginTop: 40, marginBottom: 20}}>A cada quantos <Bold>segundos</Bold> deve ser <Bold>medido</Bold> a <Bold>umidade do solo</Bold>?</NormalParagraph>
+
           <StyleTextInput
-            onChangeText={captureHumiditySensorRoutine}
-            placeholder="5"
+            onChangeText={(time) => {captureHumiditySensorRoutine(time)}}
+            placeholder="digite o tempo em segundos, exemplo: 60."
+            style={{marginBottom: 50}}
           />
-          <Button
-            title="adicionar"
-            onPress={()=> { addComponent("humidity_sensor")}}
-          />
+
+          <TouchableOpacity onPress={() => {addComponent("humidity_sensor")}}>
+            <HortaCard
+              style={
+                {
+                  marginTop: 15, backgroundColor: Colors.primarySaturateDarkest, flex: 1, justifyContent: 'center', flexDirection: 'row', alignItems: 'center',   padding: 7
+                }
+              }>
+              <Bold style={{fontSize: 16, color: 'white'}}>ADICIONAR</Bold>
+            </HortaCard>
+          </TouchableOpacity>
         </>
       );
     }else if(params.component == 'solenoide') {
       return (
         <>
-          <Text>Nova válvula solenoide</Text>
-          <Text>Irrigar se a umidade estivar abaixo de quantos porcento?</Text>
-          <StyleTextInput
-            onChangeText={captureSolenoideOpenPercentage}
-            placeholder="60"
-          />
-          <Button
-            title="adicionar"
-            onPress={()=> { addComponent("solenoide")}}
-          />
+          <PageHeader>
+            <PageTitleShort>Nova Válvula Solenoide</PageTitleShort>
+            <PageIcon>
+              <Image
+                source={ require('../media/icone-horta-home.png') }
+                resizeMode="contain"
+                style={{width: 45, height: 45}}
+              /> 
+            </PageIcon>
+          </PageHeader>
+
+        <NormalParagraph style={{width: '60%', textAlign: 'justify', marginTop: 40, marginBottom: 20}}>Quando o solo estiver com a <Bold>umidade abaixo</Bold> de quantos porcento deve ser <Bold>iniciado</Bold> a <Bold>irrigação</Bold>?</NormalParagraph>
+
+        <StyleTextInput
+          onChangeText={(percentage) => {captureSolenoideOpenPercentage(percentage)}}
+          placeholder="digite a porcentagem, exemplo: 1, 50, 100."
+          style={{marginBottom: 50}}
+        />
+
+        <TouchableOpacity onPress={() => {addComponent("solenoide")}}>
+          <HortaCard
+            style={
+              {
+                marginTop: 15, backgroundColor: Colors.primarySaturateDarkest, flex: 1, justifyContent: 'center', flexDirection: 'row', alignItems: 'center',   padding: 7
+              }
+            }>
+            <Bold style={{fontSize: 16, color: 'white'}}>ADICIONAR</Bold>
+          </HortaCard>
+        </TouchableOpacity>
         </>
       );
     }
   }
   return (
-    <View>
+    <StyledContainer>
       { renderComponentInfo() }
-    </View>
+    </StyledContainer>
   )
 }
 
